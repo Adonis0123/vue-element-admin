@@ -1,7 +1,13 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-25 00:32:14
+ * @LastEditTime: 2020-07-25 01:17:10
+ * @LastEditors: Hzh
+-->
 <template>
   <div class="errPage-container">
-    <ErrorA />
-    <ErrorB />
+    <error-a />
+    <error-b />
     <h3>Please click the bug icon in the upper right corner</h3>
     <aside>
       Now the management system are basically the form of the spa, it enhances the user experience, but it also increases the possibility of page problems, a small negligence may lead to the entire page deadlock. Fortunately Vue provides a way to catch handling exceptions, where you can handle errors or report exceptions.

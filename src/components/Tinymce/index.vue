@@ -1,8 +1,14 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-25 00:32:14
+ * @LastEditTime: 2020-07-25 01:17:00
+ * @LastEditors: Hzh
+-->
 <template>
   <div :class="{fullscreen:fullscreen}" class="tinymce-container" :style="{width:containerWidth}">
     <textarea :id="tinymceId" class="tinymce-textarea" />
     <div class="editor-custom-btn-container">
-      <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
+      <editor-image color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
     </div>
   </div>
 </template>

@@ -1,3 +1,9 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-25 00:32:14
+ * @LastEditTime: 2020-07-25 01:23:16
+ * @LastEditors: Hzh
+-->
 <template>
   <div class="login-container">
     <el-form
@@ -73,7 +79,7 @@
     </el-form>
 
     <el-dialog title="Or connect with" :visible.sync="showDialog">
-      Can not be simulated on local, so please combine you own business simulation! ! !
+      不能在本地模拟，所以请结合您自己的业务模拟！
       <br>
       <br>
       <br>
@@ -117,12 +123,12 @@ export default {
           { required: true, trigger: 'blur', validator: validatePassword }
         ]
       },
-      passwordType: 'password',
-      capsTooltip: false,
+      passwordType: 'password', // 控制密码显示或隐藏
+      capsTooltip: false, // 键盘大小写提示
       loading: false,
-      showDialog: false,
-      redirect: undefined,
-      otherQuery: {}
+      showDialog: false, // 开启第三方验证
+      redirect: undefined, // 重定向页面
+      otherQuery: {} // 页面地址除了重定向的其他传值
     }
   },
   watch: {
