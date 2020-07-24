@@ -3,7 +3,7 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
 const state = {
-  token: getToken(),
+  token: getToken(), // 刷新之后获取Token
   name: '',
   avatar: '',
   introduction: '',
@@ -29,14 +29,16 @@ const mutations = {
 }
 
 const actions = {
-  // user login
+  /**
+   * @description: 用户登录
+   */
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        setToken(data.token) // 设置Token
         resolve()
       }).catch(error => {
         reject(error)
@@ -44,7 +46,9 @@ const actions = {
     })
   },
 
-  // get user info
+  /**
+   * @description: 获取用户信息
+   */
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {

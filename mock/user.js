@@ -1,3 +1,10 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:17
+ * @LastEditTime: 2020-07-24 10:23:19
+ * @LastEditors: Hzh
+ * @Description:登录接口mock
+ */
 
 const tokens = {
   admin: {

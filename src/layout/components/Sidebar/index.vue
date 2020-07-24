@@ -1,3 +1,10 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-07-24 18:14:26
+ * @LastEditors: Hzh
+ * @Description:侧边栏
+-->
 <template>
   <div :class="{'has-logo':showLogo}">
     <logo v-if="showLogo" :collapse="isCollapse" />
@@ -12,7 +19,12 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item
+          v-for="route in permission_routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -27,25 +39,38 @@ import variables from '@/styles/variables.scss'
 export default {
   components: { SidebarItem, Logo },
   computed: {
-    ...mapGetters([
-      'permission_routes',
-      'sidebar'
-    ]),
+    ...mapGetters(['permission_routes', 'sidebar']),
+
+    /**
+     * @description: 侧边栏高亮
+     */
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
-      // if set path, the sidebar will highlight the path you set
+      // 如果设置了这一属性，那么侧边栏高亮的地方将指向你设置的地址
       if (meta.activeMenu) {
         return meta.activeMenu
       }
       return path
     },
+
+    /**
+     * @description: 展示侧边栏的logo
+     */
     showLogo() {
       return this.$store.state.settings.sidebarLogo
     },
+
+    /**
+     * @description: 设置侧边栏的样式
+     */
     variables() {
       return variables
     },
+
+    /**
+     * @description: 水平折叠收起菜单
+     */
     isCollapse() {
       return !this.sidebar.opened
     }

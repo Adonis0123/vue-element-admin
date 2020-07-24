@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 
 import Cookies from 'js-cookie'
@@ -12,10 +13,10 @@ import '@/styles/index.scss' // global css
 
 import App from './App'
 import store from './store'
-import router from './router'
+import router from './router/index' // 引入路由
 
 import './icons' // icon
-import './permission' // permission control
+import './permission' // 权限控制
 import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
