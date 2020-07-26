@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-24 18:14:26
+ * @LastEditTime: 2020-07-26 20:19:29
  * @LastEditors: Hzh
  * @Description:侧边栏
 -->
@@ -14,7 +14,7 @@
         :collapse="isCollapse"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
-        :unique-opened="false"
+        :unique-opened="uniqueOpened"
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
         mode="vertical"
@@ -59,6 +59,13 @@ export default {
      */
     showLogo() {
       return this.$store.state.settings.sidebarLogo
+    },
+
+    /**
+     * @description: 是否只保持一个子菜单的展开
+     */
+    uniqueOpened() {
+      return this.$store.state.settings.uniqueOpened
     },
 
     /**
