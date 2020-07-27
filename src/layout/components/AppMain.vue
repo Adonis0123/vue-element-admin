@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-25 00:32:14
+ * @LastEditTime: 2020-07-27 23:59:17
+ * @LastEditors: Hzh
+ * @Description:主体内容
+-->
+
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
@@ -12,10 +20,14 @@
 export default {
   name: 'AppMain',
   computed: {
+    /**
+     * @description: 需要缓存的页面
+     */
     cachedViews() {
       return this.$store.state.tagsView.cachedViews
     },
     key() {
+      // 只要保证 key 唯一性就可以了，保证不同页面的 key 不相同
       return this.$route.path
     }
   }
@@ -24,24 +36,25 @@ export default {
 
 <style lang="scss" scoped>
 .app-main {
-  /* 50= navbar  50  */
+  /*头部的高度  50= navbar  50*/
+
   min-height: calc(100vh - 50px);
   width: 100%;
   position: relative;
   overflow: hidden;
 }
 
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 
 .hasTagsView {
   .app-main {
-    /* 84 = navbar + tags-view = 50 + 34 */
+    /*头部的高度加标签页的高度  84 = navbar + tags-view = 50 + 34 */
     min-height: calc(100vh - 84px);
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 84px;
   }
 }

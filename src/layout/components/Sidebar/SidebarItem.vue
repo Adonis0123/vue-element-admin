@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-27 18:12:39
+ * @LastEditTime: 2020-07-28 00:08:44
  * @LastEditors: Hzh
  * @Description:组件嵌套
 -->
@@ -60,7 +60,7 @@ export default {
   },
   data() {
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
-    // TODO: refactor with render function
+    // TODO: 使用 render function 重构
     this.onlyOneChild = null
     return {}
   },
