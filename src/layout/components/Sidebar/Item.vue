@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-07-27 09:22:36
+ * @LastEditors: Hzh
+ * @Description:侧边栏的文字
+-->
+
 <script>
 export default {
   name: 'MenuItem',
