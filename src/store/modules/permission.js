@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-24 17:08:28
+ * @LastEditTime: 2020-07-27 17:58:40
  * @LastEditors: Hzh
  * @Description:处理异步路由
  */
@@ -45,8 +45,8 @@ export function filterAsyncRoutes(routes, roles) {
 }
 
 const state = {
-  routes: [],
-  addRoutes: []
+  routes: [], // 所有路由
+  addRoutes: [] // 异步路由
 }
 
 const mutations = {

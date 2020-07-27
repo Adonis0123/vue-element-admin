@@ -76,17 +76,25 @@ const actions = {
     })
   },
 
-  // user logout
+  /**
+   * @description: 退出登录
+   */
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
+
+        // 移除Token
         removeToken()
+        // 重置路由
         resetRouter()
 
-        // reset visited views and cached views
-        // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
+        /**
+         * @description: 重置访问的视图和缓存的视图 to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
+         * 直接在模块中commit('mutation')/dispatch('action')，默认提交/分发的是模块中的mutation/action
+         * 想要调用全局，需要在之后加上{root:true}
+         */
         dispatch('tagsView/delAllViews', null, { root: true })
 
         resolve()

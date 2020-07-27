@@ -1,3 +1,10 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-07-27 14:25:13
+ * @LastEditors: Hzh
+ * @Description:布局设置
+-->
 <template>
   <el-dropdown trigger="click" @command="handleSetSize">
     <div>
@@ -35,12 +42,12 @@ export default {
       this.$store.dispatch('app/setSize', size)
       this.refreshView()
       this.$message({
-        message: 'Switch Size Success',
+        message: '选择尺寸成功',
         type: 'success'
       })
     },
     refreshView() {
-      // In order to make the cached page re-rendered
+      // 以便重新呈现缓存页
       this.$store.dispatch('tagsView/delAllCachedViews', this.$route)
 
       const { fullPath } = this.$route

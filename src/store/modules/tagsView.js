@@ -134,6 +134,7 @@ const actions = {
       })
     })
   },
+
   delAllVisitedViews({ commit, state }) {
     return new Promise(resolve => {
       commit('DEL_ALL_VISITED_VIEWS')

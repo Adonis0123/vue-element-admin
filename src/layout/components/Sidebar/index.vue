@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-26 20:19:29
+ * @LastEditTime: 2020-07-27 17:56:19
  * @LastEditors: Hzh
  * @Description:侧边栏
 -->
@@ -77,6 +77,7 @@ export default {
 
     /**
      * @description: 水平折叠收起菜单
+     * 菜单展开,则isCollapse因为false,反之。
      */
     isCollapse() {
       return !this.sidebar.opened
