@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-07-27 18:12:39
+ * @LastEditors: Hzh
+ * @Description:组件嵌套
+-->
+
 <template>
   <div v-if="!item.hidden">
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
