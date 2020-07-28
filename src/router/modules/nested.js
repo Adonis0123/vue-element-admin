@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-28 10:33:45
+ * @LastEditTime: 2020-07-28 17:06:51
  * @LastEditors: Hzh
  * @Description:多级路由嵌套
  */
@@ -12,6 +12,7 @@ const nestedRouter = {
   path: '/nested',
   component: Layout,
   redirect: '/nested/menu1/menu1-1',
+  // alwaysShow: true,
   name: 'Nested',
   meta: {
     title: 'Nested Routes',
@@ -23,7 +24,7 @@ const nestedRouter = {
       component: () => import('@/views/nested/menu1/index'), // Parent router-view
       name: 'Menu1',
       meta: { title: 'Menu 1' },
-      redirect: '/nested/menu1/menu1-1',
+      // redirect: '/nested/menu1/menu1-1',
       children: [
         {
           path: 'menu1-1',

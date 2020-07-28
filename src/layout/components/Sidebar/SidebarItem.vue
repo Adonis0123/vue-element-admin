@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-28 15:49:34
+ * @LastEditTime: 2020-07-28 17:08:09
  * @LastEditors: Hzh
  * @Description:组件嵌套
 -->
@@ -9,9 +9,8 @@
 <template>
   <div v-if="!item.hidden">
     <!-- 菜单 -->
-    <template
-      v-if="theOnlyOneChild"
-    >
+    <!-- alwaysShow 当菜单目录下只有一个菜单时，也展示该菜单目录 -->
+    <template v-if="theOnlyOneChild&&!item.alwaysShow">
       <app-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
         <el-menu-item
           :index="resolvePath(theOnlyOneChild.path)"
@@ -104,8 +103,9 @@ export default {
         // 当只有一个子菜单时，返回该子菜单，菜单目录将会隐藏直接显示子菜单
         return this.showingChildren[0]
       }
-      // 当前是菜单
-      return this.item
+
+      // 当前的菜单,这里path之所以要清空，是因为不清空的话会造成最后一个拼接的path重复
+      return { ...this.item, path: '' }
     }
   },
   methods: {
@@ -121,6 +121,7 @@ export default {
       if (isExternal(this.basePath)) {
         return this.basePath
       }
+
       // 合并basePath和routerPath 例如/permission page将会变成/permission/page
       return path.resolve(this.basePath, routePath)
     }
