@@ -1,21 +1,32 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-28 00:08:44
+ * @LastEditTime: 2020-07-28 15:49:34
  * @LastEditors: Hzh
  * @Description:组件嵌套
 -->
 
 <template>
   <div v-if="!item.hidden">
-    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" />
+    <!-- 菜单 -->
+    <template
+      v-if="theOnlyOneChild"
+    >
+      <app-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
+        <el-menu-item
+          :index="resolvePath(theOnlyOneChild.path)"
+          :class="{'submenu-title-noDropdown':!isNest}"
+        >
+          <item
+            :icon="theOnlyOneChild.meta.icon||(item.meta&&item.meta.icon)"
+            :title="theOnlyOneChild.meta.title"
+          />
         </el-menu-item>
       </app-link>
     </template>
 
+    <!-- 菜单目录 -->
+    <!-- 递归循环此组件 -->
     <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template slot="title">
         <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="item.meta.title" />
@@ -44,51 +55,65 @@ export default {
   components: { Item, AppLink },
   mixins: [FixiOSBug],
   props: {
-    // route object
+    // route object  第一级的路由或递归时菜单目录的路由
     item: {
       type: Object,
       required: true
     },
+    // 一级菜单目录下，菜单收起时的样式
     isNest: {
       type: Boolean,
       default: false
     },
+    // 第一级的路由路径或递归时菜单目录的路径
     basePath: {
       type: String,
       default: ''
     }
   },
   data() {
-    // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
-    // TODO: 使用 render function 重构
-    this.onlyOneChild = null
     return {}
   },
-  methods: {
-    hasOneShowingChild(children = [], parent) {
-      const showingChildren = children.filter(item => {
-        if (item.hidden) {
-          return false
-        } else {
-          // Temp set(will be used if only has one showing child)
-          this.onlyOneChild = item
-          return true
-        }
-      })
-
-      // When there is only one child router, the child router is displayed by default
-      if (showingChildren.length === 1) {
-        return true
+  computed: {
+    /**
+     * 获取需要显示的子菜单或菜单目录数组，当数组长度大于0时，说明当前是菜单目录
+     */
+    showingChildren() {
+      if (this.item.children) {
+        const showingChildren = this.item.children.filter((item) => {
+          if (item.hidden) {
+            return false
+          } else {
+            return true
+          }
+        })
+        return showingChildren
       }
-
-      // Show parent if there are no child router to display
-      if (showingChildren.length === 0) {
-        this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
-        return true
-      }
-
-      return false
+      return []
     },
+
+    /**
+     * 判断当前是子菜单还是菜单目录， 获取要显示的子菜单
+     */
+    theOnlyOneChild() {
+      if (this.showingChildren.length > 1) {
+        // 需要显示的子菜单数量大于1，说明当前是菜单目录
+        return null
+      }
+      if (this.showingChildren.length === 1) {
+        // 当只有一个子菜单时，返回该子菜单，菜单目录将会隐藏直接显示子菜单
+        return this.showingChildren[0]
+      }
+      // 当前是菜单
+      return this.item
+    }
+  },
+  methods: {
+    /**
+     * @description: 处理跳转的路由
+     * @param {Srting} routePath 路由路径或者外链
+     * @returns {String} 处理过后路由路径
+     */
     resolvePath(routePath) {
       if (isExternal(routePath)) {
         return routePath
@@ -96,6 +121,7 @@ export default {
       if (isExternal(this.basePath)) {
         return this.basePath
       }
+      // 合并basePath和routerPath 例如/permission page将会变成/permission/page
       return path.resolve(this.basePath, routePath)
     }
   }
