@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-28 17:08:09
+ * @LastEditTime: 2020-07-28 17:12:55
  * @LastEditors: Hzh
  * @Description:组件嵌套
 -->
@@ -95,12 +95,13 @@ export default {
      * 判断当前是子菜单还是菜单目录， 获取要显示的子菜单
      */
     theOnlyOneChild() {
+      // 需要显示的子菜单数量大于1，说明当前是菜单目录
       if (this.showingChildren.length > 1) {
-        // 需要显示的子菜单数量大于1，说明当前是菜单目录
         return null
       }
+
+      // 当只有一个子菜单时，返回该子菜单，菜单目录将会隐藏直接显示子菜单
       if (this.showingChildren.length === 1) {
-        // 当只有一个子菜单时，返回该子菜单，菜单目录将会隐藏直接显示子菜单
         return this.showingChildren[0]
       }
 

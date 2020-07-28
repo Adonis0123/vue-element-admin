@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-24 10:39:06
+ * @LastEditTime: 2020-07-28 17:28:54
  * @LastEditors: Hzh
  * @Description:封装axios
  */
@@ -20,18 +20,17 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
   config => {
-    // do something before request is sent
+    // do something 在请求发送前
 
     if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
+      // 让每个请求携带token
+      // ['X-Token']为自定义key 请根据实际情况自行修改
       config.headers['X-Token'] = getToken()
     }
     return config
   },
   error => {
-    // do something with request error
+    // do something 发送请求失败的话
     console.log(error) // for debug
     return Promise.reject(error)
   }
@@ -40,19 +39,19 @@ service.interceptors.request.use(
 // respone拦截器
 service.interceptors.response.use(
   /**
-   * If you want to get http information such as headers or status
-   * Please return  response => response
+   * 如果您想获取http信息，如头或状态
+   * 那么设置 return  response => response
   */
 
   /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by HTTP Status Code
+   * 通过自定义代码确定请求状态
+   * 下面只是一个例子
+   * 你也可以通过 HTTP Status Code 来判断
    */
   response => {
     const res = response.data
 
-    // if the custom code is not 20000, it is judged as an error.
+    // 如果自定义的code不是 20000, 那么则判定为错误.
     if (res.code !== 20000) {
       Message({
         message: res.message || 'Error',
