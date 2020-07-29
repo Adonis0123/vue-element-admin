@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-27 17:58:40
+ * @LastEditTime: 2020-07-29 09:44:21
  * @LastEditors: Hzh
  * @Description:处理异步路由
  */
@@ -11,6 +11,7 @@ import { asyncRoutes, constantRoutes } from '@/router/index'
  * 根据 meta.role 判断当前用户是否有权限
  * @param {Array}  roles  用户拥有的角色
  * @param {Array}  route  当前遍历到的路由
+ * @returns {Boolean}
  */
 function hasPermission(roles, route) {
   if (route.meta && route.meta.roles) {
@@ -32,7 +33,7 @@ export function filterAsyncRoutes(routes, roles) {
 
   routes.forEach(route => {
     const tmp = { ...route } // 浅拷贝,只拷贝了一层
-    console.log(tmp)
+    // console.log(tmp)
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, roles)

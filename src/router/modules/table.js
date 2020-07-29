@@ -1,3 +1,10 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-07-29 10:02:22
+ * @LastEditors: Hzh
+ * @Description:表格页面
+ */
 /** When your routing table is too long, you can split it into small modules **/
 
 import Layout from '@/layout'
@@ -5,7 +12,7 @@ import Layout from '@/layout'
 const tableRouter = {
   path: '/table',
   component: Layout,
-  redirect: '/table/complex-table',
+  // redirect: '/table/complex-table',
   name: 'Table',
   meta: {
     title: 'Table',

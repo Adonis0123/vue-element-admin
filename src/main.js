@@ -17,7 +17,7 @@ import router from './router/index' // 引入路由
 
 import './icons' // icon
 import './permission' // 权限控制
-import './utils/error-log' // error log
+import './utils/error-log' // 错误日志
 
 import * as filters from './filters' // global filters
 
