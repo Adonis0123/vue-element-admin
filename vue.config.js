@@ -65,6 +65,9 @@ module.exports = {
     // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')
 
+    // 兼容ie
+    config.entry.app = ['babel/polyfill', './src/main.js']
+
     // set svg-sprite-loader
     config.module
       .rule('svg')
