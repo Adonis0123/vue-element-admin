@@ -1,3 +1,10 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:17
+ * @LastEditTime: 2020-07-29 17:16:58
+ * @LastEditors: Hzh
+ * @Description:前端mock数据
+ */
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
 
@@ -13,9 +20,9 @@ const mocks = [
   ...search
 ]
 
-// for front mock
-// please use it cautiously, it will redefine XMLHttpRequest,
-// which will cause many of your third-party libraries to be invalidated(like progress event).
+// 为了给前端mock
+// 请谨慎使用，它会重新定义XMLHttpRequest，
+// 这将导致许多第三方库失效（如progress event）.
 function mockXHR() {
   // mock patch
   // https://github.com/nuysoft/Mock/issues/300

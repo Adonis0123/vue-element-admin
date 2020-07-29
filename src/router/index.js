@@ -411,10 +411,13 @@ const createRouter = () => new Router({
 
 const router = createRouter()
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+/**
+ * @description: 重置 router
+ * Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+ */
 export function resetRouter() {
   const newRouter = createRouter()
-  router.matcher = newRouter.matcher // 重置 router
+  router.matcher = newRouter.matcher
 }
 
 export default router

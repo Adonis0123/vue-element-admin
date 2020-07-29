@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:17
- * @LastEditTime: 2020-07-24 10:23:19
+ * @LastEditTime: 2020-07-29 17:39:40
  * @LastEditors: Hzh
  * @Description:登录接口mock
  */
@@ -31,11 +31,15 @@ const users = {
 }
 
 module.exports = [
-  // user login
+  // 用户登录
+  // url 必须能匹配你的接口路由
+  // 比如 fetchComments 对应的路由可能是 /article/1/comments 或者 /article/2/comments
+  // 所以你需要通过正则来进行匹配
   {
     url: '/vue-element-admin/user/login',
     type: 'post',
     response: config => {
+      // 返回的结果
       const { username } = config.body
       const token = tokens[username]
 
