@@ -1,3 +1,10 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-07-31 09:51:32
+ * @LastEditors: Hzh
+ * @Description:首页
+-->
 <template>
   <div class="dashboard-container">
     <component :is="currentRole" />
@@ -5,6 +12,7 @@
 </template>
 
 <script>
+
 import { mapGetters } from 'vuex'
 import adminDashboard from './admin'
 import editorDashboard from './editor'
