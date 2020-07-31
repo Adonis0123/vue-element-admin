@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-31 18:11:48
+ * @LastEditTime: 2020-07-31 18:21:05
  * @LastEditors: Hzh
  * @Description:搜索菜单
 -->
@@ -222,10 +222,11 @@ export default {
       // 高亮替换v-html值
       for (let i = 0; i < options.length; i++) {
         options[i].title = options[i].title.join(' > ')
-        const replaceStr = `<span style="color:${this.themeColor}">${query}</span>`
-        console.log(options[i].title.match(replaceReg))
+        // const replaceStr = `<span style="color:${this.themeColor}">${query}</span>`
         // 开始替换
-        options[i].title = options[i].title.replace(replaceReg, replaceStr)
+        options[i].title = options[i].title.replace(replaceReg, (txt) => {
+          return `<span style="color:${this.themeColor}">${txt}</span>`
+        })
       }
       arr = options
       return arr
