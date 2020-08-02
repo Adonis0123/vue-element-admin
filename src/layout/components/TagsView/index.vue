@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-25 00:32:14
+ * @LastEditTime: 2020-08-03 00:01:02
+ * @LastEditors: Hzh
+ * @Description:标签组件 @contextmenu 右键菜单
+-->
+
 <template>
   <div id="tags-view-container" class="tags-view-container">
     <scroll-pane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
@@ -77,6 +85,7 @@ export default {
       routes.forEach(route => {
         if (route.meta && route.meta.affix) {
           const tagPath = path.resolve(basePath, route.path)
+          console.log(tagPath)
           tags.push({
             fullPath: tagPath,
             path: tagPath,

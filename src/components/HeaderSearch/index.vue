@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-31 18:21:05
+ * @LastEditTime: 2020-08-01 00:45:07
  * @LastEditors: Hzh
  * @Description:搜索菜单
 -->
@@ -21,12 +21,7 @@
       @change="change"
     >
       <!-- 升级高亮 -->
-      <el-option
-        v-for="item in options"
-        :key="item.path"
-        :value="item"
-        v-html="item.title"
-      />
+      <el-option v-for="item in options" :key="item.path" :value="item" v-html="item.title" />
     </el-select>
   </div>
 </template>
@@ -138,13 +133,13 @@ export default {
         // 设置搜索的值
         keys: [
           {
-            name: 'title', // 搜索title
-            weight: 0.7 // 比重
-          },
-          {
-            name: 'path', // 搜索path
-            weight: 0.3
+            name: 'title' // 搜索title
+            // weight: 0.7 // 比重
           }
+          // {
+          //   name: 'path', // 搜索path
+          //   weight: 0.3
+          // }
         ]
       })
     },
@@ -202,34 +197,32 @@ export default {
      */
     querySearch(query) {
       if (query !== '') {
-        // 深拷贝
         this.options = this.searchHighligt(this.fuse.search(query), query)
       } else {
         this.options = []
       }
     },
+
     /**
-   * @description: 搜索高亮
-   * @param {Array}  optionArr 搜索到的结果
-   * @param {String} query 用户输入的值
-   * @returns {Array} 高亮后的结果
-   */
+     * @description: 搜索高亮
+     * @param {Array}  optionArr 搜索到的结果
+     * @param {String} query 用户输入的值
+     * @returns {Array} 高亮后的结果
+     */
     searchHighligt(optionArr, query) {
       const options = JSON.parse(JSON.stringify(optionArr))
-      let arr = []
       // 匹配关键字正则
       const replaceReg = new RegExp(query, 'gi')
       // 高亮替换v-html值
       for (let i = 0; i < options.length; i++) {
         options[i].title = options[i].title.join(' > ')
-        // const replaceStr = `<span style="color:${this.themeColor}">${query}</span>`
         // 开始替换
-        options[i].title = options[i].title.replace(replaceReg, (txt) => {
-          return `<span style="color:${this.themeColor}">${txt}</span>`
-        })
+        options[i].title = options[i].title.replace(
+          replaceReg,
+          (txt) => `<span style="color:${this.themeColor}">${txt}</span>`
+        )
       }
-      arr = options
-      return arr
+      return options
     }
   }
 }
