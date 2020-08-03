@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-03 16:24:15
+ * @LastEditTime: 2020-08-04 00:26:54
  * @LastEditors: Hzh
  * @Description:标签操作
  */
@@ -52,17 +52,20 @@ const mutations = {
     index > -1 && state.cachedViews.splice(index, 1)
   },
 
+  /* 删除其他视图，除了在router设置了affix或当前选中的视图 */
   DEL_OTHERS_VISITED_VIEWS: (state, view) => {
     state.visitedViews = state.visitedViews.filter(v => {
       return v.meta.affix || v.path === view.path
     })
   },
+
+  /* 删除其他缓存的视图，除了当前选中的缓存视图  */
   DEL_OTHERS_CACHED_VIEWS: (state, view) => {
     const index = state.cachedViews.indexOf(view.name)
     if (index > -1) {
-      state.cachedViews = state.cachedViews.slice(index, index + 1)
+      state.cachedViews = state.cachedViews.slice(index, index + 1) // 等同于state.cachedViews = [view.name]
     } else {
-      // if index = -1, there is no cached tags
+      // 如果index = -1 则说明没有缓存的视图
       state.cachedViews = []
     }
   },
@@ -139,6 +142,10 @@ const actions = {
     })
   },
 
+  /**
+   * @description: 删除其他标签
+   * @param {Object} view 当前选中的标签
+   */
   delOthersViews({ dispatch, state }, view) {
     return new Promise(resolve => {
       dispatch('delOthersVisitedViews', view)
@@ -149,12 +156,22 @@ const actions = {
       })
     })
   },
+
+  /**
+   * @description: 删除其他视图
+   * @param {Object} view 标签
+   */
   delOthersVisitedViews({ commit, state }, view) {
     return new Promise(resolve => {
       commit('DEL_OTHERS_VISITED_VIEWS', view)
       resolve([...state.visitedViews])
     })
   },
+
+  /**
+   * @description: 删除缓存视图
+   * @param {Object} view 标签
+   */
   delOthersCachedViews({ commit, state }, view) {
     return new Promise(resolve => {
       commit('DEL_OTHERS_CACHED_VIEWS', view)

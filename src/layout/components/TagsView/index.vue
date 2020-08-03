@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-03 16:54:40
+ * @LastEditTime: 2020-08-04 00:09:55
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -261,6 +261,7 @@ export default {
 
       this.top = e.clientY // 返回当事件被触发时鼠标指针向对于浏览器页面（或当前窗户）的垂直坐标
       this.visible = true
+      // 给当前选中的标签赋值
       this.selectedTag = tag
     },
     closeMenu() {
