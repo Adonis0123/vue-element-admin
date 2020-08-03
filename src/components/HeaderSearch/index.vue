@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-01 00:45:07
+ * @LastEditTime: 2020-08-03 09:20:52
  * @LastEditors: Hzh
  * @Description:搜索菜单
 -->
@@ -20,7 +20,6 @@
       class="header-search-select"
       @change="change"
     >
-      <!-- 升级高亮 -->
       <el-option v-for="item in options" :key="item.path" :value="item" v-html="item.title" />
     </el-select>
   </div>

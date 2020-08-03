@@ -1,9 +1,9 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-03 00:01:02
+ * @LastEditTime: 2020-08-03 16:54:40
  * @LastEditors: Hzh
- * @Description:标签组件 @contextmenu 右键菜单
+ * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
 
 <template>
@@ -18,10 +18,14 @@
         tag="span"
         class="tags-view-item"
         @click.middle.native="!isAffix(tag)?closeSelectedTag(tag):''"
-        @contextmenu.prevent.native="openMenu(tag,$event)"
+        @click.right.prevent.native="openMenu(tag,$event)"
       >
         {{ tag.title }}
-        <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
+        <span
+          v-if="!isAffix(tag)"
+          class="el-icon-close"
+          @click.prevent.stop="closeSelectedTag(tag)"
+        />
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
@@ -41,17 +45,24 @@ export default {
   components: { ScrollPane },
   data() {
     return {
-      visible: false,
-      top: 0,
+      visible: false, // 展示右键菜单
+      top: 0, // 右键菜单的距离，同下
       left: 0,
-      selectedTag: {},
+      selectedTag: {}, // 右键菜单所属的标签
       affixTags: []
     }
   },
   computed: {
+    /**
+     * @description: 所有的标签
+     */
     visitedViews() {
       return this.$store.state.tagsView.visitedViews
     },
+
+    /**
+     * @description: 所有的路由
+     */
     routes() {
       return this.$store.state.permission.routes
     }
@@ -61,6 +72,10 @@ export default {
       this.addTags()
       this.moveToCurrentTag()
     },
+
+    /**
+     * @description: 全局监听点击事件，关闭右键菜单，visible为false则不监听
+     */
     visible(value) {
       if (value) {
         document.body.addEventListener('click', this.closeMenu)
@@ -74,18 +89,28 @@ export default {
     this.addTags()
   },
   methods: {
+    /**
+     * @description: 判断当前标签是否对应当前展示的路由，是则高亮
+     * @param {Object} route 标签对象
+     */
     isActive(route) {
       return route.path === this.$route.path
     },
+
+    /**
+     * @description: router的meta里面是否设置了affix固定标签
+     * @param {Object} tag 标签对象
+     */
     isAffix(tag) {
       return tag.meta && tag.meta.affix
     },
+
     filterAffixTags(routes, basePath = '/') {
       let tags = []
-      routes.forEach(route => {
+      routes.forEach((route) => {
         if (route.meta && route.meta.affix) {
           const tagPath = path.resolve(basePath, route.path)
-          console.log(tagPath)
+          // console.log(tagPath)
           tags.push({
             fullPath: tagPath,
             path: tagPath,
@@ -102,8 +127,9 @@ export default {
       })
       return tags
     },
+
     initTags() {
-      const affixTags = this.affixTags = this.filterAffixTags(this.routes)
+      const affixTags = (this.affixTags = this.filterAffixTags(this.routes))
       for (const tag of affixTags) {
         // Must have tag name
         if (tag.name) {
@@ -111,6 +137,7 @@ export default {
         }
       }
     },
+
     addTags() {
       const { name } = this.$route
       if (name) {
@@ -118,6 +145,7 @@ export default {
       }
       return false
     },
+
     moveToCurrentTag() {
       const tags = this.$refs.tag
       this.$nextTick(() => {
@@ -133,6 +161,11 @@ export default {
         }
       })
     },
+
+    /**
+     * @description: 刷新右键选中的标签并跳转
+     * @param {Object} view 标签路由
+     */
     refreshSelectedTag(view) {
       this.$store.dispatch('tagsView/delCachedView', view).then(() => {
         const { fullPath } = view
@@ -143,56 +176,90 @@ export default {
         })
       })
     },
+
+    /**
+     * @description: 关闭选中的标签
+     * @param {Object} view 当前的标签
+     */
     closeSelectedTag(view) {
-      this.$store.dispatch('tagsView/delView', view).then(({ visitedViews }) => {
-        if (this.isActive(view)) {
-          this.toLastView(visitedViews, view)
-        }
-      })
+      this.$store
+        .dispatch('tagsView/delView', view)
+        .then(({ visitedViews }) => {
+          // 如果当前关闭的是高亮中的标签，那么就跳转是标签数组里最后一个标签
+          if (this.isActive(view)) {
+            this.toLastView(visitedViews, view)
+          }
+        })
     },
+
+    /**
+     * @description: 关闭其他标签,注释到这里
+     */
     closeOthersTags() {
       this.$router.push(this.selectedTag)
-      this.$store.dispatch('tagsView/delOthersViews', this.selectedTag).then(() => {
-        this.moveToCurrentTag()
-      })
+      this.$store
+        .dispatch('tagsView/delOthersViews', this.selectedTag)
+        .then(() => {
+          this.moveToCurrentTag()
+        })
     },
+
+    /**
+     * @description: 关闭所有标签
+     * @param {Object} view 当前右键选中的标签
+     */
     closeAllTags(view) {
       this.$store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
-        if (this.affixTags.some(tag => tag.path === view.path)) {
+        // 如果选择关闭全部的标签在router里面设置了affix,则不跳转
+        if (this.affixTags.some((tag) => tag.path === view.path)) {
           return
         }
+        // 跳转标签最后一个
         this.toLastView(visitedViews, view)
       })
     },
+
+    /**
+     * @description: 跳转标签数组里最后一个标签
+     * @param {Array} visitedViews 标签数组
+     * @param {Object} view 被选中的标签
+     */
     toLastView(visitedViews, view) {
-      const latestView = visitedViews.slice(-1)[0]
+      // 最后一个标签
+      const latestView = visitedViews.slice(-1)[0] //  visitedViews[visitedViews.length - 1]
+      // 如果有最后一个标签的话
       if (latestView) {
         this.$router.push(latestView.fullPath)
       } else {
-        // now the default is to redirect to the home page if there is no tags-view,
-        // you can adjust it according to your needs.
+        // 如果没有标签数组的话，默认会跳到首页，并刷新页面
+        // 你也可以根据你的需求进行更改
         if (view.name === 'Dashboard') {
-          // to reload home page
           this.$router.replace({ path: '/redirect' + view.fullPath })
         } else {
           this.$router.push('/')
         }
       }
     },
-    openMenu(tag, e) {
-      const menuMinWidth = 105
-      const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
-      const offsetWidth = this.$el.offsetWidth // container width
-      const maxLeft = offsetWidth - menuMinWidth // left boundary
-      const left = e.clientX - offsetLeft + 15 // 15: margin right
 
+    /**
+     * @description: 右键打开标签项
+     * @param {Object} tag 当前右键的标签
+     * @param {Object} e $event 当前的点击元素的事件对象
+     */
+    openMenu(tag, e) {
+      const menuMinWidth = 105 // 菜单的最小宽度
+      // Element.getBoundingClientRect() 方法返回元素的大小及其相对于视口的位置。
+      const offsetLeft = this.$el.getBoundingClientRect().left // container margin left 相对于相对于视口左侧的位置
+      const offsetWidth = this.$el.offsetWidth // container width 整个标签页的宽度
+      const maxLeft = offsetWidth - menuMinWidth // 左边界
+      const left = e.clientX - offsetLeft + 15 // 15: （鼠标右键后向右偏移15） 返回当事件被触发时鼠标指针向对于浏览器页面（或当前窗户）的水平坐标。
       if (left > maxLeft) {
         this.left = maxLeft
       } else {
         this.left = left
       }
 
-      this.top = e.clientY
+      this.top = e.clientY // 返回当事件被触发时鼠标指针向对于浏览器页面（或当前窗户）的垂直坐标
       this.visible = true
       this.selectedTag = tag
     },
@@ -212,7 +279,7 @@ export default {
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #d8dce5;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
   .tags-view-wrapper {
     .tags-view-item {
       display: inline-block;
@@ -238,7 +305,7 @@ export default {
         color: #fff;
         border-color: #42b983;
         &::before {
-          content: '';
+          content: "";
           background: #fff;
           display: inline-block;
           width: 8px;
@@ -261,7 +328,7 @@ export default {
     font-size: 12px;
     font-weight: 400;
     color: #333;
-    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
+    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
     li {
       margin: 0;
       padding: 7px 16px;
@@ -284,10 +351,10 @@ export default {
       vertical-align: 2px;
       border-radius: 50%;
       text-align: center;
-      transition: all .3s cubic-bezier(.645, .045, .355, 1);
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
       transform-origin: 100% 50%;
       &:before {
-        transform: scale(.6);
+        transform: scale(0.6);
         display: inline-block;
         vertical-align: -3px;
       }

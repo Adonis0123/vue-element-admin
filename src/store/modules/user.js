@@ -104,7 +104,9 @@ const actions = {
     })
   },
 
-  // remove token
+  /**
+   * @description: 删除Token
+   */
   resetToken({ commit }) {
     return new Promise(resolve => {
       commit('SET_TOKEN', '')
@@ -114,7 +116,9 @@ const actions = {
     })
   },
 
-  // 动态修改权限
+  /**
+   * @description: 动态修改权限
+   */
   async changeRoles({ commit, dispatch }, role) {
     const token = role + '-token'
 
@@ -130,7 +134,7 @@ const actions = {
     // dynamically add accessible routes
     router.addRoutes(accessRoutes)
 
-    // reset visited views and cached views
+    // 重置访问的视图和缓存的视图
     dispatch('tagsView/delAllViews', null, { root: true })
   }
 }

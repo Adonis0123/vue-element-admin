@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-27 15:11:33
+ * @LastEditTime: 2020-08-03 13:30:47
  * @LastEditors: Hzh
  * @Description:根据屏幕宽度判断pc端还是移动端
  */
@@ -45,7 +45,7 @@ export default {
      * @description: 判断当前页面的宽度是否小于992，小于992则视为移动端
      */
     $_isMobile() {
-      // getBoundingClientRect()用于获得页面中某个元素的左，上，右和下分别相对浏览器视窗的位置、以及宽高
+      // Element.getBoundingClientRect() 方法返回元素的大小及其相对于视口的位置。
       const rect = body.getBoundingClientRect()
       return rect.width - 1 < WIDTH
     },
