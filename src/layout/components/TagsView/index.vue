@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-04 14:36:41
+ * @LastEditTime: 2020-08-04 15:14:14
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -267,9 +267,17 @@ export default {
       // 给当前选中的标签赋值
       this.selectedTag = tag
     },
+
+    /**
+     * @description: 关闭右键菜单
+     */
     closeMenu() {
       this.visible = false
     },
+
+    /**
+     * @description: 滚动的时候关闭右键菜单
+     */
     handleScroll() {
       this.closeMenu()
     }

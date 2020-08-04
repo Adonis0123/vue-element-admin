@@ -1,18 +1,23 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-04 14:44:10
+ * @LastEditTime: 2020-08-04 18:32:39
  * @LastEditors: Hzh
  * @Description:标签组件横向滚动条 @wheel
 -->
 <template>
-  <el-scrollbar ref="scrollContainer" :vertical="false" class="scroll-container" @wheel.native.prevent="handleScroll">
+  <el-scrollbar
+    ref="scrollContainer"
+    :vertical="false"
+    class="scroll-container"
+    @wheel.native.prevent="handleScroll"
+  >
     <slot />
   </el-scrollbar>
 </template>
 
 <script>
-const tagAndTagSpacing = 4 // tagAndTagSpacing
+const tagAndTagSpacing = 5 // 标签与标签之间的距离
 
 export default {
   name: 'ScrollPane',
@@ -22,11 +27,17 @@ export default {
     }
   },
   computed: {
+    /**
+     * @description: el-scroll的wrapper
+     */
     scrollWrapper() {
       return this.$refs.scrollContainer.$refs.wrap
     }
   },
   mounted() {
+    /**
+     * @description: 监听滚动事件，向父组件提交事件
+     */
     this.scrollWrapper.addEventListener('scroll', this.emitScroll, true)
     this.$on('hook:beforeDestroy', () => {
       this.scrollWrapper.removeEventListener('scroll', this.emitScroll)
@@ -38,6 +49,10 @@ export default {
       const $scrollWrapper = this.scrollWrapper
       $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft + eventDelta / 4
     },
+
+    /**
+     * @description: 提交滚动事件
+     */
     emitScroll() {
       this.$emit('scroll')
     },
@@ -48,37 +63,43 @@ export default {
      * $el 获取dom元素
      */
     moveToTarget(currentTag) {
-      const $container = this.$refs.scrollContainer.$el
-      const $containerWidth = $container.offsetWidth
-      const $scrollWrapper = this.scrollWrapper
-      const tagList = this.$parent.$refs.tag
-
+      const $container = this.$refs.scrollContainer.$el // 获取标签容器的DOM
+      const $containerWidth = $container.offsetWidth // 标签容器的宽度
+      const $scrollWrapper = this.scrollWrapper // el-scroll的wrapper
+      const tagList = this.$parent.$refs.tag // 标签数组
       let firstTag = null
       let lastTag = null
 
-      // find first tag and last tag
+      // 第一个标签和最后一个标签
       if (tagList.length > 0) {
         firstTag = tagList[0]
         lastTag = tagList[tagList.length - 1]
       }
-
+      // 如果第一个标签等于当前高亮的标签，则横向滚动条滚动到最左边
       if (firstTag === currentTag) {
         $scrollWrapper.scrollLeft = 0
+        // 如果最后一个标签等于当前高亮的标签，则横向滚动条滚动的位置等于滚动条的宽度减去整个标签容器的宽度
       } else if (lastTag === currentTag) {
-        $scrollWrapper.scrollLeft = $scrollWrapper.scrollWidth - $containerWidth
+        $scrollWrapper.scrollLeft =
+          $scrollWrapper.scrollWidth - $containerWidth
       } else {
-        // find preTag and nextTag
-        const currentIndex = tagList.findIndex(item => item === currentTag)
-        const prevTag = tagList[currentIndex - 1]
-        const nextTag = tagList[currentIndex + 1]
+        // 找到前一个标签和后一个标签
+        const currentIndex = tagList.findIndex((item) => item === currentTag)
+        const prevTag = tagList[currentIndex - 1] // 前一个标签
+        const nextTag = tagList[currentIndex + 1] // 后一个标签
+        // console.dir(nextTag.$el)
+        // the tag's offsetLeft after of nextTag 当前高亮路由的后一个标签的offsetLeft
+        const afterNextTagOffsetLeft =
+          nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagAndTagSpacing
 
-        // the tag's offsetLeft after of nextTag
-        const afterNextTagOffsetLeft = nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagAndTagSpacing
+        // the tag's offsetLeft before of prevTag 当前高亮路由的前一个标签的offsetLeft
+        const beforePrevTagOffsetLeft =
+          prevTag.$el.offsetLeft - tagAndTagSpacing
 
-        // the tag's offsetLeft before of prevTag
-        const beforePrevTagOffsetLeft = prevTag.$el.offsetLeft - tagAndTagSpacing
-
-        if (afterNextTagOffsetLeft > $scrollWrapper.scrollLeft + $containerWidth) {
+        if (
+          afterNextTagOffsetLeft >
+          $scrollWrapper.scrollLeft + $containerWidth
+        ) {
           $scrollWrapper.scrollLeft = afterNextTagOffsetLeft - $containerWidth
         } else if (beforePrevTagOffsetLeft < $scrollWrapper.scrollLeft) {
           $scrollWrapper.scrollLeft = beforePrevTagOffsetLeft
