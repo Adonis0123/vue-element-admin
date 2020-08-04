@@ -1,3 +1,10 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-04 14:44:10
+ * @LastEditors: Hzh
+ * @Description:标签组件横向滚动条 @wheel
+-->
 <template>
   <el-scrollbar ref="scrollContainer" :vertical="false" class="scroll-container" @wheel.native.prevent="handleScroll">
     <slot />
@@ -21,9 +28,9 @@ export default {
   },
   mounted() {
     this.scrollWrapper.addEventListener('scroll', this.emitScroll, true)
-  },
-  beforeDestroy() {
-    this.scrollWrapper.removeEventListener('scroll', this.emitScroll)
+    this.$on('hook:beforeDestroy', () => {
+      this.scrollWrapper.removeEventListener('scroll', this.emitScroll)
+    })
   },
   methods: {
     handleScroll(e) {
@@ -34,6 +41,12 @@ export default {
     emitScroll() {
       this.$emit('scroll')
     },
+
+    /**
+     * @description: 移动到当前高亮的标签
+     * @param {Object} currentTag 当前高亮的标签
+     * $el 获取dom元素
+     */
     moveToTarget(currentTag) {
       const $container = this.$refs.scrollContainer.$el
       const $containerWidth = $container.offsetWidth

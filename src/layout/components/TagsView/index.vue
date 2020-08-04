@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-04 00:09:55
+ * @LastEditTime: 2020-08-04 14:36:41
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -24,7 +24,7 @@
         <span
           v-if="!isAffix(tag)"
           class="el-icon-close"
-          @click.prevent.stop="closeSelectedTag(tag)"
+          @click.stop.prevent="closeSelectedTag(tag)"
         />
       </router-link>
     </scroll-pane>
@@ -146,13 +146,16 @@ export default {
       return false
     },
 
+    /**
+     * @description: 移动到现在的标签
+     */
     moveToCurrentTag() {
-      const tags = this.$refs.tag
+      const tags = this.$refs.tag // 获取所有标签
       this.$nextTick(() => {
         for (const tag of tags) {
           if (tag.to.path === this.$route.path) {
-            this.$refs.scrollPane.moveToTarget(tag)
-            // when query is different then update
+            this.$refs.scrollPane.moveToTarget(tag) // 移动到当前高亮的标签
+            // 如果路由传值不一样的话则更新传值
             if (tag.to.fullPath !== this.$route.fullPath) {
               this.$store.dispatch('tagsView/updateVisitedView', this.$route)
             }
@@ -193,7 +196,7 @@ export default {
     },
 
     /**
-     * @description: 关闭其他标签,注释到这里
+     * @description: 关闭其他标签，同时跳转到选中的标签
      */
     closeOthersTags() {
       this.$router.push(this.selectedTag)

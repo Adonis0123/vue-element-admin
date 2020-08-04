@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-04 00:26:54
+ * @LastEditTime: 2020-08-04 10:56:42
  * @LastEditors: Hzh
  * @Description:标签操作
  */
@@ -80,11 +80,11 @@ const mutations = {
   DEL_ALL_CACHED_VIEWS: state => {
     state.cachedViews = []
   },
-
+  /* 更新路由的传值 */
   UPDATE_VISITED_VIEW: (state, view) => {
     for (let v of state.visitedViews) {
       if (v.path === view.path) {
-        v = Object.assign(v, view)
+        v = Object.assign(v, view) // 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
         break
       }
     }
@@ -218,6 +218,10 @@ const actions = {
     })
   },
 
+  /**
+   * @description: 更新路由的传值
+   * @param {Object} view 当前的路由
+   */
   updateVisitedView({ commit }, view) {
     commit('UPDATE_VISITED_VIEW', view)
   }
