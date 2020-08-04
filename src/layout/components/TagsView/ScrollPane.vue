@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-04 18:32:39
+ * @LastEditTime: 2020-08-05 00:28:14
  * @LastEditors: Hzh
  * @Description:标签组件横向滚动条 @wheel
 -->
@@ -22,13 +22,11 @@ const tagAndTagSpacing = 5 // 标签与标签之间的距离
 export default {
   name: 'ScrollPane',
   data() {
-    return {
-      left: 0
-    }
+    return {}
   },
   computed: {
     /**
-     * @description: el-scroll的wrapper
+     * @description: el-scroll的wrapper，产生滚动的地方
      */
     scrollWrapper() {
       return this.$refs.scrollContainer.$refs.wrap
@@ -44,6 +42,10 @@ export default {
     })
   },
   methods: {
+    /**
+     * @description: 标签容器滚动事件
+     * @param {Object} e 滚动事件对象
+     */
     handleScroll(e) {
       const eventDelta = e.wheelDelta || -e.deltaY * 40
       const $scrollWrapper = this.scrollWrapper
@@ -87,7 +89,7 @@ export default {
         const currentIndex = tagList.findIndex((item) => item === currentTag)
         const prevTag = tagList[currentIndex - 1] // 前一个标签
         const nextTag = tagList[currentIndex + 1] // 后一个标签
-        // console.dir(nextTag.$el)
+
         // the tag's offsetLeft after of nextTag 当前高亮路由的后一个标签的offsetLeft
         const afterNextTagOffsetLeft =
           nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagAndTagSpacing
@@ -96,12 +98,14 @@ export default {
         const beforePrevTagOffsetLeft =
           prevTag.$el.offsetLeft - tagAndTagSpacing
 
+        // 如果当前高亮路由的后一个标签的不在可视范围内
         if (
           afterNextTagOffsetLeft >
           $scrollWrapper.scrollLeft + $containerWidth
         ) {
           $scrollWrapper.scrollLeft = afterNextTagOffsetLeft - $containerWidth
         } else if (beforePrevTagOffsetLeft < $scrollWrapper.scrollLeft) {
+          // 如果当前高亮路由的前一个标签不在可视范围内
           $scrollWrapper.scrollLeft = beforePrevTagOffsetLeft
         }
       }

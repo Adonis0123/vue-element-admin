@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-04 15:14:14
+ * @LastEditTime: 2020-08-05 00:40:40
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -131,19 +131,21 @@ export default {
     initTags() {
       const affixTags = (this.affixTags = this.filterAffixTags(this.routes))
       for (const tag of affixTags) {
-        // Must have tag name
+        // Must have tag name 标签必须要有name，也就是router的路由必须设置name属性才会显示标签
         if (tag.name) {
           this.$store.dispatch('tagsView/addVisitedView', tag)
         }
       }
     },
 
+    /**
+     * @description: 把当前显示的路由添加到标签组中
+     */
     addTags() {
       const { name } = this.$route
       if (name) {
         this.$store.dispatch('tagsView/addView', this.$route)
       }
-      return false
     },
 
     /**
