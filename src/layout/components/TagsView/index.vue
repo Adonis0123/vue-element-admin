@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-05 00:40:40
+ * @LastEditTime: 2020-08-05 16:14:53
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -87,6 +87,7 @@ export default {
   mounted() {
     this.initTags()
     this.addTags()
+    this.moveToCurrentTag()
   },
   methods: {
     /**
@@ -105,29 +106,35 @@ export default {
       return tag.meta && tag.meta.affix
     },
 
+    /**
+     * @description: 递归遍历路由表，获取meta带有affix的路由
+     * @param {Object} routes 递归路由
+     * @param {Object} basePath 父路由路径
+     * @returns {Array} 标签数组
+     */
     filterAffixTags(routes, basePath = '/') {
       let tags = []
-      routes.forEach((route) => {
+      for (const route of routes) {
+        const tagPath = path.resolve(basePath, route.path)
         if (route.meta && route.meta.affix) {
-          const tagPath = path.resolve(basePath, route.path)
-          // console.log(tagPath)
           tags.push({
-            fullPath: tagPath,
             path: tagPath,
+            fullPath: tagPath,
             name: route.name,
             meta: { ...route.meta }
           })
         }
-        if (route.children) {
-          const tempTags = this.filterAffixTags(route.children, route.path)
-          if (tempTags.length >= 1) {
-            tags = [...tags, ...tempTags]
-          }
+        if (route.children && route.children.length) {
+          const tempTags = this.filterAffixTags(route.children, tagPath)
+          tags = [...tags, ...tempTags]
         }
-      })
+      }
       return tags
     },
 
+    /**
+     * @description: 初始化标签数组,获取在router设置了affix的固定标签
+     */
     initTags() {
       const affixTags = (this.affixTags = this.filterAffixTags(this.routes))
       for (const tag of affixTags) {
@@ -142,14 +149,21 @@ export default {
      * @description: 把当前显示的路由添加到标签组中
      */
     addTags() {
-      const { name } = this.$route
+      const { path, fullPath, name, meta } = this.$route
+      // 拷贝标签需要的属性
+      const tag = {
+        path,
+        fullPath,
+        name,
+        meta
+      }
       if (name) {
-        this.$store.dispatch('tagsView/addView', this.$route)
+        this.$store.dispatch('tagsView/addView', tag)
       }
     },
 
     /**
-     * @description: 移动到现在的标签
+     * @description: 移动到高亮的标签
      */
     moveToCurrentTag() {
       const tags = this.$refs.tag // 获取所有标签

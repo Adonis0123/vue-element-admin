@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-31 16:23:33
+ * @LastEditTime: 2020-08-05 14:05:09
  * @LastEditors: Hzh
  * @Description:多级路由嵌套
  */
@@ -31,6 +31,7 @@ const nestedRouter = {
           component: () => import('@/views/nested/menu1/menu1-1'),
           name: 'Menu1-1',
           meta: { title: 'Menu 1-1' }
+
         },
         {
           path: 'menu1-2',

@@ -1,3 +1,10 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-05 14:21:41
+ * @LastEditors: Hzh
+ * @Description:全局函数入口
+ */
 
 import Vue from 'vue'
 
@@ -20,6 +27,8 @@ import './permission' // 权限控制
 import './utils/error-log' // 错误日志
 
 import * as filters from './filters' // global filters
+
+import { localData, sessionData } from '@/utils/storage.js' // 浏览器存储工具函数
 
 /**
  * 如果你不想使用 mock-server
@@ -45,6 +54,10 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.config.productionTip = false
+
+Vue.prototype.$localData = localData
+
+Vue.prototype.$sessionData = sessionData
 
 new Vue({
   el: '#app',

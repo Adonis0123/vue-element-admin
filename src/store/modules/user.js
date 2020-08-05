@@ -91,7 +91,7 @@ const actions = {
         resetRouter()
 
         /**
-         * @description: 重置访问的视图和缓存的视图 to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
+         * @description: 退出时重置访问的视图和缓存的视图 to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
          * 直接在模块中commit('mutation')/dispatch('action')，默认提交/分发的是模块中的mutation/action
          * 想要调用全局，需要在之后加上{root:true}
          */

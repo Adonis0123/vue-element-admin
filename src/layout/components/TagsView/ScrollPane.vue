@@ -1,9 +1,9 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-05 00:28:14
+ * @LastEditTime: 2020-08-05 16:09:17
  * @LastEditors: Hzh
- * @Description:标签组件横向滚动条 @wheel
+ * @Description:标签组件横向滚动条 @wheel滚轮滚动事件
 -->
 <template>
   <el-scrollbar
