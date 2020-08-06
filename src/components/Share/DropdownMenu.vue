@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 15:23:10
+ * @LastEditors: Hzh
+ * @Description:点击展示下拉菜单
+-->
+
 <template>
   <div :class="{active:isActive}" class="share-dropdown-menu">
     <div class="share-dropdown-menu-wrapper">

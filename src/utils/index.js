@@ -45,7 +45,7 @@ export function parseTime(time, cFormat) {
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
+    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
     return value.toString().padStart(2, '0')
   })
   return time_str
@@ -354,4 +354,16 @@ export function removeClass(ele, cls) {
     const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
     ele.className = ele.className.replace(reg, ' ')
   }
+}
+
+/**
+ * @description: 数组的位置交换
+ * @param {Array} arr 数组
+ * @param {Number} index1 交换的index
+ * @param {Number} index2 交换的index
+ * @returns {Array} 交换后的数组
+ */
+export function swapArray(arr, index1, index2) {
+  arr[index1] = arr.splice(index2, 1, arr[index1])[0]
+  return arr
 }

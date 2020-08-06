@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 15:56:39
+ * @LastEditors: Hzh
+ * @Description:吸顶组件
+-->
+
 <template>
   <div :style="{height:height+'px',zIndex:zIndex}">
     <div

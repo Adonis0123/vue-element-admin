@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 14:43:34
+ * @LastEditors: Hzh
+ * @Description:拖拽列表
+-->
+
 <template>
   <div class="dndList">
     <div :style="{width:width1}" class="dndList-list">

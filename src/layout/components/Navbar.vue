@@ -40,9 +40,9 @@
           </router-link>
           <a
             target="_blank"
-            href="https://panjiachen.github.io/vue-element-admin/#/login?redirect=%2Fdashboard"
+            href="https://panjiachen.gitee.io/vue-element-admin/#/"
           >
-            <el-dropdown-item>项目地址</el-dropdown-item>
+            <el-dropdown-item>项目在线地址</el-dropdown-item>
           </a>
           <a target="_blank" href="https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/#%E5%8A%9F%E8%83%BD">
             <el-dropdown-item>项目文档</el-dropdown-item>

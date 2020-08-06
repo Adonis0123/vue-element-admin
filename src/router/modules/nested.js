@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-05 14:05:09
+ * @LastEditTime: 2020-08-06 18:57:02
  * @LastEditors: Hzh
  * @Description:多级路由嵌套
  */
@@ -14,8 +14,9 @@ const nestedRouter = {
   redirect: '/nested/menu1/menu1-1',
   // alwaysShow: true,
   name: 'Nested',
+  sort: 12,
   meta: {
-    title: 'Nested Routes',
+    title: '路由嵌套',
     icon: 'nested'
   },
   children: [

@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 14:44:19
+ * @LastEditors: Hzh
+ * @Description:多选框可拖拽演示
+-->
+
 <template>
   <div class="components-container">
     <el-drag-select v-model="value" style="width:500px;" multiple placeholder="请选择">

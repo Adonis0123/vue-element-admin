@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-05 16:14:53
+ * @LastEditTime: 2020-08-06 13:22:40
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -63,8 +63,13 @@ export default {
     /**
      * @description: 所有的路由
      */
-    routes() {
-      return this.$store.state.permission.routes
+    routes: {
+      get() {
+        return this.$store.state.permission.routes
+      },
+      set() {
+        this.$dispatch('tagsView/delAllViews')
+      }
     }
   },
   watch: {
@@ -87,7 +92,9 @@ export default {
   mounted() {
     this.initTags()
     this.addTags()
-    this.moveToCurrentTag()
+    this.$nextTick(() => {
+      this.moveToCurrentTag()
+    })
   },
   methods: {
     /**
@@ -173,7 +180,14 @@ export default {
             this.$refs.scrollPane.moveToTarget(tag) // 移动到当前高亮的标签
             // 如果路由传值不一样的话则更新传值
             if (tag.to.fullPath !== this.$route.fullPath) {
-              this.$store.dispatch('tagsView/updateVisitedView', this.$route)
+              const { path, fullPath, name, meta } = this.$route
+              const tag = {
+                path,
+                fullPath,
+                name,
+                meta
+              }
+              this.$store.dispatch('tagsView/updateVisitedView', tag)
             }
             break
           }

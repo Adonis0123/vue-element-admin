@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 15:09:28
+ * @LastEditors: Hzh
+ * @Description:图片hover效果
+-->
+
 <template>
   <div :style="{zIndex:zIndex,height:height,width:width}" class="pan-item">
     <div class="pan-info">

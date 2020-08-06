@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 14:44:19
+ * @LastEditors: Hzh
+ * @Description:多选框可拖拽
+-->
+
 <template>
   <el-select ref="dragSelect" v-model="selectVal" v-bind="$attrs" class="drag-select" multiple v-on="$listeners">
     <slot />

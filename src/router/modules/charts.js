@@ -1,4 +1,10 @@
-/** When your routing table is too long, you can split it into small modules**/
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 18:56:44
+ * @LastEditors: Hzh
+ * @Description:图表
+ */
 
 import Layout from '@/layout'
 
@@ -7,23 +13,13 @@ const chartsRouter = {
   component: Layout,
   redirect: 'noRedirect',
   name: 'Charts',
+  alwaysShow: true,
+  sort: 5,
   meta: {
-    title: 'Charts',
+    title: '图表',
     icon: 'chart'
   },
   children: [
-    {
-      path: 'keyboard',
-      component: () => import('@/views/charts/keyboard'),
-      name: 'KeyboardChart',
-      meta: { title: 'Keyboard Chart', noCache: true }
-    },
-    {
-      path: 'line',
-      component: () => import('@/views/charts/line'),
-      name: 'LineChart',
-      meta: { title: 'Line Chart', noCache: true }
-    },
     {
       path: 'mix-chart',
       component: () => import('@/views/charts/mix-chart'),

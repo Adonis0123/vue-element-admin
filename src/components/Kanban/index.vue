@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 14:47:26
+ * @LastEditors: Hzh
+ * @Description:可拖拽看板
+-->
+
 <template>
   <div class="board-column">
     <div class="board-column-header">

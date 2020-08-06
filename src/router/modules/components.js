@@ -1,4 +1,10 @@
-/** When your routing table is too long, you can split it into small modules **/
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 18:56:54
+ * @LastEditors: Hzh
+ * @Description:组件库
+ */
 
 import Layout from '@/layout'
 
@@ -7,8 +13,9 @@ const componentsRouter = {
   component: Layout,
   redirect: 'noRedirect',
   name: 'ComponentDemo',
+  sort: 4,
   meta: {
-    title: 'Components',
+    title: '组件库',
     icon: 'component'
   },
   children: [
@@ -16,7 +23,7 @@ const componentsRouter = {
       path: 'tinymce',
       component: () => import('@/views/components-demo/tinymce'),
       name: 'TinymceDemo',
-      meta: { title: 'Tinymce' }
+      meta: { title: '富文本编辑器' }
     },
     {
       path: 'markdown',
@@ -25,77 +32,48 @@ const componentsRouter = {
       meta: { title: 'Markdown' }
     },
     {
-      path: 'json-editor',
-      component: () => import('@/views/components-demo/json-editor'),
-      name: 'JsonEditorDemo',
-      meta: { title: 'JSON Editor' }
-    },
-    {
-      path: 'split-pane',
-      component: () => import('@/views/components-demo/split-pane'),
-      name: 'SplitpaneDemo',
-      meta: { title: 'SplitPane' }
-    },
-    {
-      path: 'avatar-upload',
-      component: () => import('@/views/components-demo/avatar-upload'),
-      name: 'AvatarUploadDemo',
-      meta: { title: 'Upload' }
-    },
-    {
-      path: 'dropzone',
-      component: () => import('@/views/components-demo/dropzone'),
-      name: 'DropzoneDemo',
-      meta: { title: 'Dropzone' }
-    },
-    {
       path: 'sticky',
       component: () => import('@/views/components-demo/sticky'),
       name: 'StickyDemo',
-      meta: { title: 'Sticky' }
+      meta: { title: 'Sticky 吸顶效果' }
     },
-    {
-      path: 'count-to',
-      component: () => import('@/views/components-demo/count-to'),
-      name: 'CountToDemo',
-      meta: { title: 'Count To' }
-    },
+
     {
       path: 'mixin',
       component: () => import('@/views/components-demo/mixin'),
       name: 'ComponentMixinDemo',
-      meta: { title: 'Component Mixin' }
+      meta: { title: '小组件' }
     },
     {
       path: 'back-to-top',
       component: () => import('@/views/components-demo/back-to-top'),
       name: 'BackToTopDemo',
-      meta: { title: 'Back To Top' }
+      meta: { title: '返回顶部' }
     },
     {
       path: 'drag-dialog',
       component: () => import('@/views/components-demo/drag-dialog'),
       name: 'DragDialogDemo',
-      meta: { title: 'Drag Dialog' }
+      meta: { title: '拖拽 Dialog（弹出框）' }
+    },
+    {
+      path: 'drag-select',
+      component: () => import('@/views/components-demo/drag-select'),
+      name: 'DragSelectDemo',
+      meta: { title: '拖拽 Select（多选框）' }
+    },
+    {
+      path: 'dnd-list',
+      component: () => import('@/views/components-demo/dnd-list'),
+      name: 'DndListDemo',
+      meta: { title: '拖拽 列表' }
+    },
+    {
+      path: 'drag-kanban',
+      component: () => import('@/views/components-demo/drag-kanban'),
+      name: 'DragKanbanDemo',
+      meta: { title: '拖拽 看板' }
     }
-    // {
-    //   path: 'drag-select',
-    //   component: () => import('@/views/components-demo/drag-select'),
-    //   name: 'DragSelectDemo',
-    //   meta: { title: 'Drag Select' }
-    // },
-    // {
-    //   path: 'dnd-list',
-    //   component: () => import('@/views/components-demo/dnd-list'),
-    //   name: 'DndListDemo',
-    //   meta: { title: 'Dnd List' }
-    // },
-    // {
-    //   path: 'drag-kanban',
-    //   component: () => import('@/views/components-demo/drag-kanban'),
-    //   name: 'DragKanbanDemo',
-    //   meta: { title: 'Drag Kanban' }
-    // }
   ]
 }
 

@@ -1,18 +1,18 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-07-25 01:17:10
+ * @LastEditTime: 2020-08-06 10:10:56
  * @LastEditors: Hzh
 -->
 <template>
   <div class="errPage-container">
     <error-a />
     <error-b />
-    <h3>Please click the bug icon in the upper right corner</h3>
+    <h3>请单击右上角的bug图标</h3>
     <aside>
-      Now the management system are basically the form of the spa, it enhances the user experience, but it also increases the possibility of page problems, a small negligence may lead to the entire page deadlock. Fortunately Vue provides a way to catch handling exceptions, where you can handle errors or report exceptions.
+      现在的管理系统基本上都是spa的形式，它提高了用户体验，但也增加了页面出现问题的可能性，稍有疏忽就可能导致整个页面死锁。幸运的是，Vue提供了一种捕获处理异常的方法，您可以在其中处理错误或报告异常。
       <a target="_blank" class="link-type" href="https://panjiachen.github.io/vue-element-admin-site/guide/advanced/error.html">
-        Document introduction
+        介绍文件
       </a>
     </aside>
     <a href="#">

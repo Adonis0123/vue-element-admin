@@ -1,3 +1,12 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 14:53:59
+ * @LastEditors: Hzh
+ * @Description:Material Design 的input
+ * source:https://github.com/wemake-services/vue-material-input/blob/master/src/components/MaterialInput.vue
+-->
+
 <template>
   <div :class="computedClasses" class="material-input__component">
     <div :class="{iconClass:icon}">
@@ -110,7 +119,6 @@
 </template>
 
 <script>
-// source:https://github.com/wemake-services/vue-material-input/blob/master/src/components/MaterialInput.vue
 
 export default {
   name: 'MdInput',

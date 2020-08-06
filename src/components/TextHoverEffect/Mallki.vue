@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 16:08:10
+ * @LastEditors: Hzh
+ * @Description:文字hover text展示效果
+-->
+
 <template>
   <a :class="className" class="link--mallki" href="#">
     {{ text }}

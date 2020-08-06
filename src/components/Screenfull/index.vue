@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 15:19:06
+ * @LastEditors: Hzh
+ * @Description:全屏功能
+-->
+
 <template>
   <div>
     <svg-icon :icon-class="isFullscreen?'exit-fullscreen':'fullscreen'" @click="click" />

@@ -1,5 +1,13 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 14:16:51
+ * @LastEditors: Hzh
+ * @Description:跳转到github
+-->
+
 <template>
-  <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" class="github-corner" aria-label="View source on Github">
+  <a href="https://github.com/Adonis0123/vue-element-admin" target="_blank" class="github-corner" aria-label="跳转到 Github">
     <svg
       width="80"
       height="80"

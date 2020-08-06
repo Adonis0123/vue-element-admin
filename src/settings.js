@@ -1,41 +1,46 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-27 09:20:18
+ * @LastEditTime: 2020-08-06 13:38:51
+ * @LastEditors: Hzh
+ * @Description:全局设置文件
+ */
 module.exports = {
   title: 'Vue Element Admin',
 
   /**
-   * @type {boolean} true | false
    * @description 是否显示设置右面板
+   * @type {boolean} true | false
    */
   showSettings: true,
 
   /**
-   * @type {boolean} true | false
    * @description 是否显示标签
+   * @type {boolean} true | false
    */
   tagsView: true,
 
   /**
-   * @type {boolean} true | false
    * @description 是否固定头部
+   * @type {boolean} true | false
    */
   fixedHeader: false,
 
   /**
-   * @type {boolean} true | false
    * @description 是否在侧边栏显示LOGO
-   */
-  sidebarLogo: false,
-
-  /**
    * @type {boolean} true | false
-   * @description 是否只保持一个子菜单的展开
    */
-  uniqueOpened: false,
+  sidebarLogo: true,
 
   /**
-   * @type {string | array} 'production' | ['production', 'development']
-   * @description Need show err logs component.
-   * The default is only used in the production env
-   * If you want to also use it in dev, you can pass ['production', 'development']
+   * @description 是否只保持一个子菜单的展开
+   * @type {boolean} true | false
    */
-  errorLog: 'production'
+  uniqueOpened: true,
+
+  /**
+   * @description 展示 err logs 组件,根据生产环境显示
+   * @type {string | array} 'production' | ['production', 'development']
+   */
+  errorLog: ['production', 'development']
 }

@@ -1,9 +1,17 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 10:20:10
+ * @LastEditors: Hzh
+ * @Description:报错日志
+ */
+
 import Vue from 'vue'
 import store from '@/store'
 import { isString, isArray } from '@/utils/validate'
 import settings from '@/settings'
 
-// you can set in settings.js
+// 在 settings.js 里面设置生成还是开发环境监听错误
 // errorLog:'production' | ['production', 'development']
 const { errorLog: needErrorLog } = settings
 

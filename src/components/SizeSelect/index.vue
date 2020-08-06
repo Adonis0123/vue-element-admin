@@ -1,9 +1,9 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-27 14:25:13
+ * @LastEditTime: 2020-08-06 15:52:26
  * @LastEditors: Hzh
- * @Description:布局设置
+ * @Description:布局设置，选择尺寸大小
 -->
 <template>
   <el-dropdown trigger="click" @command="handleSetSize">
@@ -11,10 +11,12 @@
       <svg-icon class-name="size-icon" icon-class="size" />
     </div>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item v-for="item of sizeOptions" :key="item.value" :disabled="size===item.value" :command="item.value">
-        {{
-          item.label }}
-      </el-dropdown-item>
+      <el-dropdown-item
+        v-for="item of sizeOptions"
+        :key="item.value"
+        :disabled="size===item.value"
+        :command="item.value"
+      >{{ item.label }}</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -46,12 +48,18 @@ export default {
         type: 'success'
       })
     },
+
     refreshView() {
+      const { path, fullPath, name, meta } = this.$route
+      const tag = {
+        path,
+        fullPath,
+        name,
+        meta
+      }
+      this.$store.dispatch('tagsView/delAllCachedViews', tag)
+
       // 以便重新呈现缓存页
-      this.$store.dispatch('tagsView/delAllCachedViews', this.$route)
-
-      const { fullPath } = this.$route
-
       this.$nextTick(() => {
         this.$router.replace({
           path: '/redirect' + fullPath
@@ -59,6 +67,5 @@ export default {
       })
     }
   }
-
 }
 </script>
