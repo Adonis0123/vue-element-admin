@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-06 11:10:10
+ * @LastEditors: Hzh
+ * @Description:剪切板方法或者指令
+-->
+
 <template>
   <div class="app-container">
     <el-tabs v-model="activeName">
