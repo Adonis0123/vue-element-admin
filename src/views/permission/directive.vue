@@ -4,60 +4,70 @@
     <div :key="key" style="margin-top:30px;">
       <div>
         <span v-permission="['admin']" class="permission-alert">
-          Only
-          <el-tag class="permission-tag" size="small">admin</el-tag> can see this
+          只有
+          <el-tag class="permission-tag" size="small">admin</el-tag> 才能看到这段内容
         </span>
-        <el-tag v-permission="['admin']" class="permission-sourceCode" type="info">
-          v-permission="['admin']"
-        </el-tag>
+        <span v-permission="['admin']" class="permission-alert">
+          代码：
+          <el-tag class="permission-sourceCode" type="info" @click="handleCopy($event)">
+            v-permission="['admin']"
+          </el-tag>
+        </span>
+
       </div>
 
       <div>
         <span v-permission="['editor']" class="permission-alert">
-          Only
-          <el-tag class="permission-tag" size="small">editor</el-tag> can see this
+          只有
+          <el-tag class="permission-tag" size="small">editor</el-tag> 才能看到这段内容
         </span>
-        <el-tag v-permission="['editor']" class="permission-sourceCode" type="info">
-          v-permission="['editor']"
-        </el-tag>
+        <span v-permission="['editor']" class="permission-alert">
+          代码：
+          <el-tag class="permission-sourceCode" type="info" @click="handleCopy($event)">
+            v-permission="['editor']"
+          </el-tag>
+        </span>
       </div>
 
       <div>
         <span v-permission="['admin','editor']" class="permission-alert">
-          Both
-          <el-tag class="permission-tag" size="small">admin</el-tag> and
-          <el-tag class="permission-tag" size="small">editor</el-tag> can see this
+          <el-tag class="permission-tag" size="small">admin</el-tag> 或者
+          <el-tag class="permission-tag" size="small">editor</el-tag> 能看到这段内容
         </span>
-        <el-tag v-permission="['admin','editor']" class="permission-sourceCode" type="info">
-          v-permission="['admin','editor']"
-        </el-tag>
+        <span v-permission="['admin','editor']" class="permission-alert">
+          代码：
+          <el-tag class="permission-sourceCode" type="info" @click="handleCopy($event)">
+            v-permission="['admin','editor']"
+          </el-tag>
+        </span>
       </div>
     </div>
 
     <div :key="'checkPermission'+key" style="margin-top:60px;">
       <aside>
-        In some cases, using v-permission will have no effect. For example: Element-UI's Tab component or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.
-        <br> e.g.
+        在某些情况下，不适合使用 v-permission。例如：Element-UI 的 el-tab 或 el-table-column 以及其它动态渲染 dom 的场景。你只能通过手动设置 v-if 来实现。
+        <br>
+        例如下面例子：
       </aside>
 
       <el-tabs type="border-card" style="width:550px;">
         <el-tab-pane v-if="checkPermission(['admin'])" label="Admin">
-          Admin can see this
-          <el-tag class="permission-sourceCode" type="info">
+          Admin 能看到这段内容
+          <el-tag class="permission-sourceCode" type="info" @click="handleCopy($event)">
             v-if="checkPermission(['admin'])"
           </el-tag>
         </el-tab-pane>
 
         <el-tab-pane v-if="checkPermission(['editor'])" label="Editor">
-          Editor can see this
-          <el-tag class="permission-sourceCode" type="info">
+          Editor 能看到这段内容
+          <el-tag class="permission-sourceCode" type="info" @click="handleCopy($event)">
             v-if="checkPermission(['editor'])"
           </el-tag>
         </el-tab-pane>
 
-        <el-tab-pane v-if="checkPermission(['admin','editor'])" label="Admin-OR-Editor">
-          Both admin or editor can see this
-          <el-tag class="permission-sourceCode" type="info">
+        <el-tab-pane v-if="checkPermission(['admin','editor'])" label="Admin或者Editor">
+          admin 或者 editor 能看到这段内容
+          <el-tag class="permission-sourceCode" type="info" @click="handleCopy($event)">
             v-if="checkPermission(['admin','editor'])"
           </el-tag>
         </el-tab-pane>
@@ -70,7 +80,7 @@
 import permission from '@/directive/permission/index.js' // 权限判断指令
 import checkPermission from '@/utils/permission' // 权限判断函数
 import SwitchRoles from './components/SwitchRoles'
-
+import clip from '@/utils/clipboard' // use clipboard directly
 export default {
   name: 'DirectivePermission',
   components: { SwitchRoles },
@@ -84,6 +94,10 @@ export default {
     checkPermission,
     handleRolesChange() {
       this.key++
+    },
+    handleCopy(event) {
+      const text = event.toElement.innerText
+      clip(text, event)
     }
   }
 }
@@ -94,6 +108,7 @@ export default {
   ::v-deep .permission-alert {
     width: 320px;
     margin-top: 15px;
+    margin-right: 20px;
     background-color: #f0f9eb;
     color: #67c23a;
     padding: 8px 16px;
@@ -101,7 +116,7 @@ export default {
     display: inline-block;
   }
   ::v-deep .permission-sourceCode {
-    margin-left: 15px;
+      cursor: pointer;
   }
   ::v-deep .permission-tag {
     background-color: #ecf5ff;
