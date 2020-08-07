@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-06 18:56:44
+ * @LastEditTime: 2020-08-07 11:19:35
  * @LastEditors: Hzh
  * @Description:图表
  */
@@ -16,7 +16,7 @@ const chartsRouter = {
   alwaysShow: true,
   sort: 5,
   meta: {
-    title: '图表',
+    title: '图表库',
     icon: 'chart'
   },
   children: [

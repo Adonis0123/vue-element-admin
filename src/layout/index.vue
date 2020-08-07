@@ -1,18 +1,20 @@
 <template>
-  <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-    <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView:needTagsView}" class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
-        <tags-view v-if="needTagsView" />
+  <el-scrollbar class="app-wrapper-scroll">
+    <div :class="classObj" class="app-wrapper">
+      <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+      <sidebar class="sidebar-container" />
+      <div :class="{hasTagsView:needTagsView}" class="main-container">
+        <div :class="{'fixed-header':fixedHeader}">
+          <navbar />
+          <tags-view v-if="needTagsView" />
+        </div>
+        <app-main />
+        <right-panel v-if="showSettings">
+          <settings />
+        </right-panel>
       </div>
-      <app-main />
-      <right-panel v-if="showSettings">
-        <settings />
-      </right-panel>
     </div>
-  </div>
+  </el-scrollbar>
 </template>
 
 <script>
@@ -34,11 +36,11 @@ export default {
   mixins: [ResizeMixin],
   computed: {
     ...mapState({
-      sidebar: state => state.app.sidebar,
-      device: state => state.app.device,
-      showSettings: state => state.settings.showSettings,
-      needTagsView: state => state.settings.tagsView,
-      fixedHeader: state => state.settings.fixedHeader
+      sidebar: (state) => state.app.sidebar,
+      device: (state) => state.app.device,
+      showSettings: (state) => state.settings.showSettings,
+      needTagsView: (state) => state.settings.tagsView,
+      fixedHeader: (state) => state.settings.fixedHeader
     }),
     classObj() {
       return {
@@ -58,45 +60,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "~@/styles/mixin.scss";
-  @import "~@/styles/variables.scss";
-
-  .app-wrapper {
-    @include clearfix;
-    position: relative;
-    height: 100%;
-    width: 100%;
-
-    &.mobile.openSidebar {
-      position: fixed;
-      top: 0;
-    }
+@import "~@/styles/mixin.scss";
+@import "~@/styles/variables.scss";
+.app-wrapper-scroll {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  ::v-deep .el-scrollbar__wrap {
+    overflow-x: hidden;
   }
+}
 
-  .drawer-bg {
-    background: #000;
-    opacity: 0.3;
-    width: 100%;
-    top: 0;
-    height: 100%;
-    position: absolute;
-    z-index: 999;
-  }
-
-  .fixed-header {
+.app-wrapper {
+  @include clearfix;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  &.mobile.openSidebar {
     position: fixed;
     top: 0;
-    right: 0;
-    z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
-    transition: width 0.28s;
   }
+}
 
-  .hideSidebar .fixed-header {
-    width: calc(100% - 54px)
-  }
+.drawer-bg {
+  background: #000;
+  opacity: 0.3;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  position: absolute;
+  z-index: 999;
+}
 
-  .mobile .fixed-header {
-    width: 100%;
-  }
+.fixed-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  width: calc(100% - #{$sideBarWidth});
+  transition: width 0.28s;
+}
+
+.hideSidebar .fixed-header {
+  width: calc(100% - 54px);
+}
+
+.mobile .fixed-header {
+  width: 100%;
+}
 </style>

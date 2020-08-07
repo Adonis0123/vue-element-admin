@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-27 17:56:19
+ * @LastEditTime: 2020-08-07 11:15:06
  * @LastEditors: Hzh
  * @Description:侧边栏
 -->
@@ -15,7 +15,7 @@
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
         :unique-opened="uniqueOpened"
-        :active-text-color="variables.menuActiveText"
+        :active-text-color="themeColor"
         :collapse-transition="false"
         mode="vertical"
       >
@@ -81,6 +81,13 @@ export default {
      */
     isCollapse() {
       return !this.sidebar.opened
+    },
+
+    /**
+     * @description: 主题颜色
+     */
+    themeColor() {
+      return this.$store.state.settings.theme
     }
   }
 }

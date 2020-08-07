@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-06 13:22:40
+ * @LastEditTime: 2020-08-07 11:14:30
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -14,6 +14,7 @@
         ref="tag"
         :key="tag.path"
         :class="isActive(tag)?'active':''"
+        :style="activeColor(tag)"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
         tag="span"
         class="tags-view-item"
@@ -70,6 +71,13 @@ export default {
       set() {
         this.$dispatch('tagsView/delAllViews')
       }
+    },
+
+    /**
+     * @description: 主题颜色
+     */
+    themeColor() {
+      return this.$store.state.settings.theme
     }
   },
   watch: {
@@ -97,6 +105,19 @@ export default {
     })
   },
   methods: {
+
+    /**
+     * @description: 标签高亮时的样式
+     * @param {Object} tag 当前选中的标签
+     */
+    activeColor(tag) {
+      if (this.isActive(tag)) {
+        return {
+          borderColor: this.themeColor,
+          background: this.themeColor
+        }
+      }
+    },
     /**
      * @description: 判断当前标签是否对应当前展示的路由，是则高亮
      * @param {Object} route 标签对象
@@ -316,8 +337,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// @import "~@/styles/element-variables.scss";
 .tags-view-container {
-  height: 34px;
+  height: 40px;
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #d8dce5;
@@ -327,15 +349,15 @@ export default {
       display: inline-block;
       position: relative;
       cursor: pointer;
-      height: 26px;
-      line-height: 26px;
+      height: 28px;
+      line-height: 28px;
       border: 1px solid #d8dce5;
       color: #495060;
       background: #fff;
       padding: 0 8px;
       font-size: 12px;
       margin-left: 5px;
-      margin-top: 4px;
+      margin-top: 6px;
       &:first-of-type {
         margin-left: 15px;
       }
@@ -343,9 +365,9 @@ export default {
         margin-right: 15px;
       }
       &.active {
-        background-color: #42b983;
+        // background-color: $--color-primary;
         color: #fff;
-        border-color: #42b983;
+        // border-color: $--color-primary;
         &::before {
           content: "";
           background: #fff;

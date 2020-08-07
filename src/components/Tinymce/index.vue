@@ -1,9 +1,11 @@
 <!--
  * @Author: Hzh
- * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-07-25 01:17:00
+ * @Date: 2020-07-27 09:20:18
+ * @LastEditTime: 2020-08-07 11:18:42
  * @LastEditors: Hzh
+ * @Description:富文本组件
 -->
+
 <template>
   <div :class="{fullscreen:fullscreen}" class="tinymce-container" :style="{width:containerWidth}">
     <textarea :id="tinymceId" class="tinymce-textarea" />

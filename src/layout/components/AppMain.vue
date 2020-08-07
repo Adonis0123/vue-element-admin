@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-07-27 23:59:17
+ * @LastEditTime: 2020-08-07 11:04:59
  * @LastEditors: Hzh
  * @Description:主体内容
 -->
@@ -50,12 +50,12 @@ export default {
 
 .hasTagsView {
   .app-main {
-    /*头部的高度加标签页的高度  84 = navbar + tags-view = 50 + 34 */
-    min-height: calc(100vh - 84px);
+    /*头部的高度加标签页的高度  90 = navbar + tags-view = 50 + 40 */
+    min-height: calc(100vh - 90px);
   }
 
   .fixed-header + .app-main {
-    padding-top: 84px;
+    padding-top: 90px;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-05 16:09:17
+ * @LastEditTime: 2020-08-07 11:02:21
  * @LastEditors: Hzh
  * @Description:标签组件横向滚动条 @wheel滚轮滚动事件
 -->
@@ -125,7 +125,7 @@ export default {
       bottom: 0px;
     }
     .el-scrollbar__wrap {
-      height: 49px;
+      height: 59px;
     }
   }
 }

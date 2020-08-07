@@ -1,3 +1,11 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-07 11:25:38
+ * @LastEditors: Hzh
+ * @Description:选择
+-->
+
 <template>
   <el-color-picker
     v-model="theme"
@@ -38,7 +46,7 @@ export default {
       console.log(themeCluster, originalCluster)
 
       const $message = this.$message({
-        message: '  Compiling the theme',
+        message: '更换主题中',
         customClass: 'theme-message',
         type: 'success',
         duration: 0,
