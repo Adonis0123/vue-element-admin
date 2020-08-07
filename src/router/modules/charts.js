@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-07 11:19:35
+ * @LastEditTime: 2020-08-07 16:51:55
  * @LastEditors: Hzh
  * @Description:图表
  */
@@ -25,6 +25,18 @@ const chartsRouter = {
       component: () => import('@/views/charts/mix-chart'),
       name: 'MixChart',
       meta: { title: 'Mix Chart', noCache: true }
+    },
+    {
+      path: 'gis-chart',
+      component: () => import('@/views/charts/gis-chart'),
+      name: 'GisChart',
+      meta: { title: 'GIS地图', noCache: true }
+    },
+    {
+      path: 'composite-pie-chart',
+      component: () => import('@/views/charts/composite-pie-chart'),
+      name: 'CompositePieChart',
+      meta: { title: '复合饼图', noCache: true }
     }
   ]
 }

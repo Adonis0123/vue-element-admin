@@ -1,3 +1,10 @@
+<!--
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-07 16:43:30
+ * @LastEditors: Hzh
+ * @Description:
+-->
 <template>
   <div class="chart-container">
     <chart height="100%" width="100%" />
@@ -17,7 +24,7 @@ export default {
 .chart-container{
   position: relative;
   width: 100%;
-  height: calc(100vh - 84px);
+  height: calc(100vh - 90px);
 }
 </style>
 
