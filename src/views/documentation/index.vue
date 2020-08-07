@@ -1,13 +1,13 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-06 13:55:58
+ * @LastEditTime: 2020-08-07 12:15:01
  * @LastEditors: Hzh
  * @Description:项目介绍
 -->
 <template>
   <div class="app-container documentation-container">
-    <a class="document-btn" target="_blank" href="https://panjiachen.gitee.io/vue-element-admin/#/">项目在线地址</a>
+    <a class="document-btn" target="_blank" href="https://panjiachen.gitee.io/vue-element-admin/#/">项目原型在线地址</a>
     <a class="document-btn" target="_blank" href="https://panjiachen.gitee.io/vue-element-admin-site/zh/">国内文档</a>
     <dropdown-menu class="document-btn" :items="articleList" title="系列文章" />
   </div>

@@ -1,12 +1,12 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-27 09:20:18
- * @LastEditTime: 2020-08-06 13:38:51
+ * @LastEditTime: 2020-08-07 11:34:28
  * @LastEditors: Hzh
  * @Description:全局设置文件
  */
 module.exports = {
-  title: 'Vue Element Admin',
+  title: '联影Admin',
 
   /**
    * @description 是否显示设置右面板
