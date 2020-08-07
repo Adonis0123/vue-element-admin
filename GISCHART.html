@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head lang='zh-CN'>
+    <meta charset='UTF-8'>
+    <title>50903MAP</title>
+    <!-- 在线方式引入arcgis_js_api3.26 -->
+    <link rel='stylesheet' href='http://js.arcgis.com/3.26/dijit/themes/claro/claro.css'>
+    <link rel='stylesheet' href='http://js.arcgis.com/3.26/esri/css/esri.css'>
+    <script src='http://js.arcgis.com/3.26/'></script>
+
+    <!-- 离线方式******本地******引入arcgis_js_api3.26 -->
+    <!-- <link rel='stylesheet' href='http://192.168.8.145:8099/arcgis_js_api/library/3.26/3.26/dijit/themes/claro/claro.css'>
+    <link rel='stylesheet' href='http://192.168.8.145:8099/arcgis_js_api/library/3.26/3.26/esri/css/esri.css'>
+    <script src='http://192.168.8.145:8099/arcgis_js_api/library/3.26/3.26/init.js'></script> -->
+
+    <!-- 离线方式******本地******引入arcgis_js_api3.24 -->
+    <!-- <link rel='stylesheet' href='http://192.168.8.145:8099/arcgis_js_api/library/3.24/3.24/dijit/themes/claro/claro.css'>
+    <link rel='stylesheet' href='http://192.168.8.145:8099/arcgis_js_api/library/3.24/3.24/esri/css/esri.css'>
+    <script src='http://192.168.8.145:8099/arcgis_js_api/library/3.24/3.24/init.js'></script> -->
+
+    <!-- <script src='jquery-1.10.1.min.js'></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <style>
+      html,body{width: 100%;height: 100%;}
+      .blurInfo {position: absolute;top: 10px;right: 5px;font-size: 1.25em;font-family: monospace;color: #4C4C4C;width: 240px;background-color: #FFFFFF;padding: 10px;border: 2px solid #57585A;border-radius: 20px;}
+      .blurInfo p span {background-color: #FFFFFF;padding: 0 5px;border-radius: 5px;}
+      .blurInfo input[type=range] {width: 100%;display: block;}
+      #map{position: relative;}
+      #HomeButton {position: absolute;top: 95px;left: 20px;z-index: 50;}
+      .blurInfo {position: absolute;top: 10px;right: 5px;font-size: 12px;font-family: monospace;color: #4C4C4C;width: 200px;background-color: #FFFFFF;padding: 10px;border: 2px solid #57585A;border-radius: 20px;}
+      .blurInfo p{font-size: 12px;}
+      .blurInfo p span {background-color: #FFFFFF;padding: 0 5px;border-radius: 5px;}
+      .blurInfo input[type=range] {width: 100%;display: block;}
+    </style>
+  </head>
+  <body>
+    <div id='map' style='width: 100%;height:100%'>
+      <div id='HomeButton'></div>
+    </div>
+    <!-- 控件 -->
+    <div class='blurInfo'>
+      <p>
+        <label for='valueControl'>按数值分配权重11</label>
+        <input id='valueControl' type='checkbox' checked>
+      </p>
+      <p>热力点模糊半径 : <span id='blurValue'>10</span></p>
+      <input id='blurControl' type='range' max=30 min=0 value=10 step=1/>
+      <p>最大值 : <span id='maxValue'>100</span></p>
+      <input id='maxControl' type='range' max=500 min=0 value=100 step=1/>
+      <p>最小值 : <span id='minValue'>0</span></p>
+      <input id='minControl' type='range' max=500 min=0 value=0 step=1/>
+    </div>
+  </body>
+  <script>
+    var map;
+    var blurCtrl = document.getElementById('blurControl');
+    var maxCtrl = document.getElementById('maxControl');
+    var minCtrl = document.getElementById('minControl');
+    var valCtrl = document.getElementById('valueControl');
+    // var httpParamsStr = window.location.href.split('?')[1]
+    // var objParams = {}
+    // // var httpParamsArr = httpParamsStr.split('&').map(item => {
+    // //     var _arr0 = item.split('=')[0]
+    // //     var _arr1 = item.split('=')[1]
+    // //     objParams[_arr0] = _arr1
+    // //     return objParams
+    // // })
+    var data=[
+      // { x: '130419.628924967', y: '37796.5781102185', address: '00那啥'},
+      // { x: '130419.628924967', y: '37796.5781102185', address: '跑起来速度如何'},
+      { x: '114.628924967', y: '22.5181102185', address: '跑起来速度如何100000000', num: 20},
+      { x: '114.628924967', y: '22.5481102185', address: '跑起来速度如何200', num: 2},
+      { x: '114.628924967', y: '22.5781102185', address: '跑起来速度如何300', num: 3},
+      { x: '114.628924967', y: '22.5981102185', address: '跑起来速度如何400', num: 4}
+    ]
+    require([
+      'esri/basemaps',
+      'esri/map',
+      'esri/graphic',
+      'esri/InfoTemplate',
+      'esri/dijit/HomeButton',
+      'esri/renderers/HeatmapRenderer',
+      'esri/geometry/Point',
+      'esri/layers/FeatureLayer',
+    ], function (esriBasemaps, Map, Graphic, InfoTemplate, HomeButton, HeatmapRenderer, Point, FeatureLayer) {
+      esriBasemaps.delorme = {
+        // arcgis官方(本地调试用)
+        baseMapLayers: [{url: 'https://services.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer'}],
+        // 龙岗（国家2000坐标系）
+        // baseMapLayers: [{url: 'http://10.101.20.220:81/ServiceAdapter/Map/LongGMap_2000_202005ban/25cadc2eafbf0a221ea782bd0ba8247c'}],
+        // 龙岗（深圳本地坐标系）
+        // baseMapLayers: [{url: 'http://10.101.20.220:81/ServiceAdapter/MAP/LongGMap20161124/25cadc2eafbf0a221ea782bd0ba8247c'}],
+        // thumbnailUrl: 'https://www.example.com/images/thumbnail_2014-11-25_61051.png',
+        title: 'Delorme'
+      };
+      // const _baseUrl = 'http://210.21.248.138:10015/warning-back/' // 公司服务
+      const _baseUrl = 'http://172.16.128.53:10015/warning-back/' // 龙岗中医院
+      // const _baseUrl = 'http://rap2.taobao.org:38080/app/mock/247378/' // rap2
+      // const _baseUrl = 'http://192.168.13.180:10005/warning-back/' // 180
+      // 获取数据
+      // $.ajax({
+      //   // url: `${_baseUrl}regionWarn/gis?&beginDate=20200101&endDate=20200609&typeId=111&type=&regionFlag=1`,
+      //   url: `${_baseUrl}regionWarn/gis?beginDate=${objParams.beginDate}&endDate=${objParams.endDate}&typeId=${objParams.typeId}&type=${objParams.type}&regionFlag=1`,
+      //   type: 'GET',
+      //   async: false, // 同步执行
+      //   success: function (res) {
+      //     if (res.resCode === '000000') {
+      //       data = res.data.data.map(item => {
+      //         return {x: item.value[1], y: item.value[0], address: item.name, num: item.value[2]}
+      //       })
+      //     }
+      //   }
+      // })
+      var showHeatMap = function (arr) {
+        var layerDefinition = {
+          'geometryType': 'esriGeometryPoint',
+          'fields': [{
+            'name': 'xxx',  // 字段名称xxx
+            'type': 'esriFieldTypeInteger'  // 字段数据类型
+          }] // 可以在数组里添加多个字段
+        };
+        var featureCollection = {
+          'layerDefinition': layerDefinition,
+          'featureSet': {
+            'features': null,
+            'geometryType': 'esriGeometryPoint' // FeatureLayer只能添加一种geometry,GraphicsLayer可以添加多种
+          }
+        };
+        var infoTemplate = new InfoTemplate('该热力点基础信息', '地址：${address} </br>数量：${num}例');
+        var heatMapLayer = new FeatureLayer(featureCollection, {
+          mode: FeatureLayer.MODE_SNAPSHOT,
+          outFields: ['*'],
+          infoTemplate: infoTemplate,
+          opacity: 1
+        });
+        heatMapLayer['id'] = 'heatMap';
+        map.addLayer(heatMapLayer);
+        var heatmapRenderer = new HeatmapRenderer({
+          colorStops: [
+            // { ratio: 0, color: 'rgba(255, 255, 255, 0)' },
+            // { ratio: 0.2, color: 'rgba(255, 255, 255, 1)' },
+            // { ratio: 0.5, color: 'rgba(255, 140, 0, 1)' },
+            // { ratio: 0.8, color: 'rgba(255, 140, 0, 1)' },
+            // { ratio: 1, color: 'rgba(255, 0, 0, 1)' }
+            { ratio: 0, color: 'rgba(0, 0, 255,0)' },
+            { ratio: 0.1, color: '#41FF11' },
+            { ratio: 0.2, color: '#70FF11' },
+            { ratio: 0.3, color: '#A0FF11' },
+            { ratio: 0.4, color: '#CFFF11' },
+            { ratio: 0.5, color: '#FFFF11' },
+            { ratio: 0.6, color: '#FFCF11' },
+            { ratio: 0.7, color: '#FFA011' },
+            { ratio: 0.8, color: '#FF7011' },
+            { ratio: 0.9, color: '#FF4111' },
+            { ratio: 1, color: '#FF1111' }
+            // { ratio: 0, color: 'rgba(0, 0, 255,0)' },
+            // { ratio: 0.5, color: 'rgb(0, 0, 255)' },
+            // { ratio: 0.7, color: 'rgb(255, 0, 255)' },
+            // { ratio: 0.9, color: 'rgb(255, 0, 0)' }
+          ],
+          blurRadius: 8,
+          field: 'num', // 控制热力点热力权重（初密集程度外的附加控制）
+          blurRadius: blurCtrl.value,
+          maxPixelIntensity: maxCtrl.value,
+          minPixelIntensity: minCtrl.value
+        });
+        for (let i = 0; i < arr.length; i++) {
+          var x = parseFloat(arr[i].x);
+          var y = parseFloat(arr[i].y);
+          var point = new Point(x, y, map.spatialReference);
+          let g = new Graphic(point, null, { 'address': arr[i].address, 'num':  arr[i].num}, null);
+          heatMapLayer.add(g);
+        }
+        heatMapLayer.setRenderer(heatmapRenderer);
+        var sliders = document.querySelectorAll('.blurInfo p~input[type=range]');
+        var addLiveValue = function (ctrl) {
+          var val = ctrl.previousElementSibling.querySelector('span');
+          ctrl.addEventListener('input', function (evt) {
+            val.innerHTML = evt.target.value;
+          });
+        };
+        for (var i = 0; i < sliders.length; i++) {
+          addLiveValue(sliders.item(i));
+        }
+        blurCtrl.addEventListener('change', function (evt) {
+          var r = +evt.target.value;
+          if (r !== heatmapRenderer.blurRadius) {
+            heatmapRenderer.blurRadius = r;
+            heatMapLayer.redraw();
+          }
+        });
+        maxCtrl.addEventListener('change', function (evt) {
+          var r = +evt.target.value;
+          if (r !== heatmapRenderer.maxPixelIntensity) {
+            heatmapRenderer.maxPixelIntensity = r;
+            heatMapLayer.redraw();
+          }
+        });
+        minCtrl.addEventListener('change', function (evt) {
+          var r = +evt.target.value;
+          if (r !== heatmapRenderer.minPixelIntensity) {
+            heatmapRenderer.minPixelIntensity = r;
+            heatMapLayer.redraw();
+          }
+        });
+        valCtrl.addEventListener('change', function (evt) {
+          var chk = evt.target.checked;
+          if (!chk) {
+            document.getElementById('maxValue').innerHTML = 21;
+            maxCtrl.value = 21;
+            heatmapRenderer.maxPixelIntensity = 21;
+          } else {
+            document.getElementById('maxValue').innerHTML = 250;
+            maxCtrl.value = 250;
+            heatmapRenderer.maxPixelIntensity = 250;
+          }
+          heatmapRenderer.field = (chk) ? 'Magnitude' : null;
+          heatMapLayer.redraw();
+        });
+      }
+      // var bounds = new Extent({ // 貌似不起作用？？？？？？？？
+      //   'xmin':100419,
+      //   'ymin':17796,
+      //   'xmax':160419,
+      //   'ymax':57796,
+      //   'spatialReference':{'wkid':102100}
+      // });
+      // map = new Map('map', {basemap: 'delorme', center: [130419.628924967, 37796.5781102185], zoom: 1});
+      map = new Map('map', {basemap: 'delorme', center: [114.628924967, 22.5981102185], zoom: 8});
+      // 底图还原
+      var home = new HomeButton({map: map}, 'HomeButton');
+      home.startup();
+      showHeatMap(data);
+    });
+  </script>
+</html>

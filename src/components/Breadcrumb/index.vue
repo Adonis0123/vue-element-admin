@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-31 16:03:49
+ * @LastEditTime: 2020-08-07 16:35:52
  * @LastEditors: Hzh
  * @Description:面包屑组件
 -->
@@ -59,7 +59,7 @@ export default {
       // 判断第一个路由是不是首页，如果不是的话就向数组开头添加首页的路由
       const first = matched[0]
       if (!this.isDashboard(first)) {
-        matched.unshift({ path: '/dashboard', meta: { title: 'Dashboard' }})
+        matched.unshift({ path: '/dashboard', meta: { title: '首页' }})
       }
 
       this.levelList = matched
