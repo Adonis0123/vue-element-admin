@@ -1,9 +1,16 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-07 14:21:06
+ * @LastEditors: Hzh
+ * @Description:点击复制工具函数
+ */
 import Vue from 'vue'
 import Clipboard from 'clipboard'
 
 function clipboardSuccess() {
   Vue.prototype.$message({
-    message: 'Copy successfully',
+    message: '复制成功',
     type: 'success',
     duration: 1500
   })
@@ -11,7 +18,7 @@ function clipboardSuccess() {
 
 function clipboardError() {
   Vue.prototype.$message({
-    message: 'Copy failed',
+    message: '复制失败',
     type: 'error'
   })
 }

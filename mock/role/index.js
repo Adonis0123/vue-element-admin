@@ -1,3 +1,10 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:17
+ * @LastEditTime: 2020-08-07 14:34:38
+ * @LastEditors: Hzh
+ * @Description:
+ */
 const Mock = require('mockjs')
 const { deepClone } = require('../utils')
 const { asyncRoutes, constantRoutes } = require('./routes.js')
@@ -8,19 +15,19 @@ const roles = [
   {
     key: 'admin',
     name: 'admin',
-    description: 'Super Administrator. Have access to view all pages.',
+    description: '超级管理员。查看所有页面。',
     routes: routes
   },
   {
     key: 'editor',
     name: 'editor',
-    description: 'Normal Editor. Can see all pages except permission page',
+    description: '普通编辑者。 可以看到除权限页面以外的所有页面',
     routes: routes.filter(i => i.path !== '/permission')// just a mock
   },
   {
     key: 'visitor',
     name: 'visitor',
-    description: 'Just a visitor. Can only see the home page and the document page',
+    description: '只是一个访客。 只能看到主页和文档页面',
     routes: [{
       path: '',
       redirect: 'dashboard',
