@@ -1,13 +1,15 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-07 11:14:30
+ * @LastEditTime: 2020-08-10 01:33:36
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
 
 <template>
   <div id="tags-view-container" class="tags-view-container">
+    <el-button style="position:fixed;top:10px" @click="moveScroll(-240)">《</el-button>
+    <el-button style="position:fixed;top:10px;right:0" @click="moveScroll(240)">》</el-button>
     <scroll-pane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link
         v-for="tag in visitedViews"
@@ -105,7 +107,6 @@ export default {
     })
   },
   methods: {
-
     /**
      * @description: 标签高亮时的样式
      * @param {Object} tag 当前选中的标签
@@ -214,6 +215,10 @@ export default {
           }
         }
       })
+    },
+
+    moveScroll(offset) {
+      this.$refs.scrollPane.moveScroll(offset)
     },
 
     /**

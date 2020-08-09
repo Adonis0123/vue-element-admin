@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-07 17:43:50
+ * @LastEditTime: 2020-08-10 01:41:21
  * @LastEditors: Hzh
  * @Description:标签组件横向滚动条 @wheel滚轮滚动事件
 -->
@@ -57,6 +57,26 @@ export default {
      */
     emitScroll() {
       this.$emit('scroll')
+    },
+
+    moveScroll(offset) {
+      const $scrollWrapper = this.scrollWrapper
+      const outerWidth = this.$refs.scrollContainer.$el.offsetWidth
+      const bodyWidth = $scrollWrapper.offsetWidth
+      if (offset < 0) {
+        $scrollWrapper.scrollLeft = Math.max(0, $scrollWrapper.scrollLeft + offset)
+      } else {
+        if (outerWidth < bodyWidth) {
+          if ($scrollWrapper.scrollLeft < -(bodyWidth - outerWidth)) {
+            // eslint-disable-next-line no-self-assign
+            $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft
+          } else {
+            $scrollWrapper.scrollLeft = Math.max($scrollWrapper.scrollLeft + offset, outerWidth - bodyWidth)
+          }
+        } else {
+          $scrollWrapper.scrollLeft = 0
+        }
+      }
     },
 
     /**
@@ -125,7 +145,8 @@ export default {
       bottom: 0px;
     }
     .el-scrollbar__wrap {
-      overflow: scroll!important;
+      // transition: left .3s ease;
+      overflow: scroll !important;
       height: 59px;
     }
   }
