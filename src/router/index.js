@@ -279,6 +279,7 @@ asyncRoutes.push({ path: '*', redirect: '/404', hidden: true })
 
 const createRouter = () => new Router({
   mode: 'history', // 生产环境需要后端支持
+  base: process.env.BASE_URL,
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
