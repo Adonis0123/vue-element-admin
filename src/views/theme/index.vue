@@ -11,7 +11,7 @@
       <div class="box-item">
         <span class="field-label">Change Theme :</span>
         <el-switch v-model="theme" />
-        <aside style="margin-top:15px;">它区别于 RightPanel 上的 theme-pick, 是两种不同的换肤方法，各自有不同的应用场景，具体请参考文档。</aside>
+        <aside class="aside" style="margin-top:15px;">它区别于 RightPanel 上的 theme-pick, 是两种不同的换肤方法，各自有不同的应用场景，具体请参考文档。</aside>
       </div>
     </el-card>
 

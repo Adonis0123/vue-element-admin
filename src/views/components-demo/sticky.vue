@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-06 16:02:29
+ * @LastEditTime: 2020-08-10 23:59:30
  * @LastEditors: Hzh
  * @Description:吸顶效果展示
 -->
@@ -50,7 +50,7 @@
     </sticky>
 
     <div class="components-container">
-      <aside>Sticky header, 当页面滚动到预设的位置会吸附在顶部.</aside>
+      <aside class="aside">Sticky header, 当页面滚动到预设的位置会吸附在顶部.</aside>
       <div>placeholder</div>
       <div>placeholder</div>
       <div>placeholder</div>

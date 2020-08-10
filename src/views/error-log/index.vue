@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-06 10:10:56
+ * @LastEditTime: 2020-08-11 00:00:03
  * @LastEditors: Hzh
 -->
 <template>
@@ -9,7 +9,7 @@
     <error-a />
     <error-b />
     <h3>请单击右上角的bug图标</h3>
-    <aside>
+    <aside class="aside">
       现在的管理系统基本上都是spa的形式，它提高了用户体验，但也增加了页面出现问题的可能性，稍有疏忽就可能导致整个页面死锁。幸运的是，Vue提供了一种捕获处理异常的方法，您可以在其中处理错误或报告异常。
       <a target="_blank" class="link-type" href="https://panjiachen.github.io/vue-element-admin-site/guide/advanced/error.html">
         介绍文件

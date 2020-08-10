@@ -15,7 +15,8 @@
       </div>
   </div>-->
 
-  <el-container class="app-wrapper">
+  <el-container :class="classObj" class="app-wrapper">
+    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <el-header>
       <navbar />
     </el-header>
@@ -108,6 +109,7 @@ export default {
 .el-aside {
   width: auto !important;
   padding: 0;
+  margin-bottom: 0;
 }
 
 .app-wrapper {
@@ -134,7 +136,7 @@ export default {
   top: 0;
   height: 100%;
   position: absolute;
-  z-index: 999;
+  z-index: 99;
 }
 
 .fixed-header {

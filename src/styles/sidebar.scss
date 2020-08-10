@@ -163,16 +163,26 @@
       margin-left: 0px;
     }
 
+    .el-aside{
+      transition: transform .28s;
+      position: fixed;
+      z-index: 100;
+    }
     .sidebar-container {
       transition: transform .28s;
       width: $sideBarWidth !important;
+   
     }
 
     &.hideSidebar {
+      .el-aside{
+        transition: transform .28s;
+        //-211px: $sideBarWidth + 1
+        transform: translate3d(-211px, 0, 0);
+      }
       .sidebar-container {
         pointer-events: none;
         transition-duration: 0.3s;
-        transform: translate3d(-$sideBarWidth, 0, 0);
       }
     }
   }
