@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-07 11:04:59
+ * @LastEditTime: 2020-08-10 18:07:44
  * @LastEditors: Hzh
  * @Description:主体内容
 -->
@@ -37,8 +37,7 @@ export default {
 <style lang="scss" scoped>
 .app-main {
   /*头部的高度  50= navbar  50*/
-
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 90px);
   width: 100%;
   position: relative;
   overflow: hidden;
