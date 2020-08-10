@@ -107,6 +107,7 @@ export default {
 }
 
 .el-aside {
+  height: calc(100vh - 50px);
   width: auto !important;
   padding: 0;
   margin-bottom: 0;
