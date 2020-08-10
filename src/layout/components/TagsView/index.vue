@@ -1,15 +1,14 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-10 01:33:36
+ * @LastEditTime: 2020-08-10 14:17:14
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
 
 <template>
   <div id="tags-view-container" class="tags-view-container">
-    <el-button style="position:fixed;top:10px" @click="moveScroll(-240)">《</el-button>
-    <el-button style="position:fixed;top:10px;right:0" @click="moveScroll(240)">》</el-button>
+    <el-button class="btn-icon btn-left" icon="el-icon-arrow-left" size="mini" @click="moveScroll(-200)" />
     <scroll-pane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link
         v-for="tag in visitedViews"
@@ -31,6 +30,7 @@
         />
       </router-link>
     </scroll-pane>
+    <el-button class="btn-icon btn-right" size="mini" icon="el-icon-arrow-right" @click="moveScroll(200)" />
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">刷新</li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</li>
@@ -217,6 +217,10 @@ export default {
       })
     },
 
+    /**
+     * @description: 移动滚动条
+     * @param {Number} offset 移动的距离
+     */
     moveScroll(offset) {
       this.$refs.scrollPane.moveScroll(offset)
     },
@@ -342,6 +346,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.btn-icon{
+  padding: 7px 5px;
+  height: 39px;
+  border: none;
+}
 // @import "~@/styles/element-variables.scss";
 .tags-view-container {
   height: 40px;
@@ -349,7 +358,11 @@ export default {
   background: #fff;
   border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+  display: flex;
+  justify-content: center;
+  position: relative;
   .tags-view-wrapper {
+     width: calc(100% - 48px); //48px: btnleft & btnright
     .tags-view-item {
       display: inline-block;
       position: relative;
