@@ -1,10 +1,10 @@
 <template>
   <el-card class="box-card-component" style="margin-left:8px;">
     <div slot="header" class="box-card-header">
-      <img src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png">
+      <img :src="scenery">
     </div>
     <div style="position:relative;">
-      <pan-thumb :image="avatar" class="panThumb" />
+      <pan-thumb :image="manAvatar" class="panThumb" />
       <mallki class-name="mallki-text" text="vue-element-admin" />
       <div style="padding-top:35px;" class="progress-item">
         <span>Vue</span>
@@ -30,6 +30,8 @@
 import { mapGetters } from 'vuex'
 import PanThumb from '@/components/PanThumb'
 import Mallki from '@/components/TextHoverEffect/Mallki'
+import scenery from '@/assets/imgs/scenery.png'
+import manAvatar from '@/assets/imgs/avatar.png'
 
 export default {
   components: { PanThumb, Mallki },
@@ -48,7 +50,9 @@ export default {
       statisticsData: {
         article_count: 1024,
         pageviews_count: 1024
-      }
+      },
+      scenery: scenery,
+      manAvatar: manAvatar
     }
   },
   computed: {

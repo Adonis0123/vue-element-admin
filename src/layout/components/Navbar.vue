@@ -28,7 +28,7 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img :src="manAvatar" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -59,6 +59,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Breadcrumb, Hamburger, ErrorLog, Screenfull, SizeSelect, HeaderSearch } from 'components'
+import avatar from '@/assets/imgs/avatar.png'
 
 export default {
   components: {
@@ -68,6 +69,11 @@ export default {
     Screenfull,
     SizeSelect,
     HeaderSearch
+  },
+  data() {
+    return {
+      manAvatar: avatar
+    }
   },
   computed: {
     ...mapGetters(['sidebar', 'avatar', 'device'])
