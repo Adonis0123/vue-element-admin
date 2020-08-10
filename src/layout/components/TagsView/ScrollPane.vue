@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-07 17:43:50
+ * @LastEditTime: 2020-08-10 14:34:24
  * @LastEditors: Hzh
  * @Description:标签组件横向滚动条 @wheel滚轮滚动事件
 -->
@@ -19,6 +19,7 @@
 <script>
 const tagAndTagSpacing = 5 // 标签与标签之间的距离
 
+import smoothscroll from 'smoothscroll-polyfill' // 解决移动端下ScrollTo不生效的问题
 export default {
   name: 'ScrollPane',
   data() {
@@ -33,6 +34,10 @@ export default {
     }
   },
   mounted() {
+    this.$nextTick(() => {
+      smoothscroll.polyfill()
+    })
+
     /**
      * @description: 监听滚动事件，向父组件提交事件
      */
@@ -57,6 +62,41 @@ export default {
      */
     emitScroll() {
       this.$emit('scroll')
+    },
+
+    /**
+     * @description: 移动滚动条
+     * @param {Number} offset 移动的距离
+     */
+    moveScroll(offset) {
+      const $scrollWrapper = this.scrollWrapper
+      const outerWidth = this.$refs.scrollContainer.$el.offsetWidth
+      const bodyWidth = $scrollWrapper.offsetWidth
+      if (offset < 0) {
+        // $scrollWrapper.scrollLeft = Math.max(0, $scrollWrapper.scrollLeft + offset)
+        this.handleScrollTo(Math.max(0, $scrollWrapper.scrollLeft + offset))
+      } else {
+        if (outerWidth <= bodyWidth) {
+          if ($scrollWrapper.scrollLeft < -(bodyWidth - outerWidth)) {
+            this.handleScrollTo($scrollWrapper.scrollLeft)
+          } else {
+            this.handleScrollTo(Math.max($scrollWrapper.scrollLeft + offset, outerWidth - bodyWidth))
+          }
+        } else {
+          this.handleScrollTo(0)
+        }
+      }
+    },
+
+    /**
+     * @description: 移动效果
+     * @param {Number} left ScrollLeft的距离
+     */
+    handleScrollTo(left) {
+      this.scrollWrapper.scrollTo({
+        left,
+        behavior: 'smooth'
+      })
     },
 
     /**
@@ -120,6 +160,7 @@ export default {
   position: relative;
   overflow: hidden;
   width: 100%;
+  background: #F0F0F0;
   ::v-deep {
     .el-scrollbar__bar {
       bottom: 0px;

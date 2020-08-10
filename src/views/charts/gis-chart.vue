@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-08-07 14:51:41
- * @LastEditTime: 2020-08-10 10:02:53
+ * @LastEditTime: 2020-08-10 10:12:20
  * @LastEditors: Hzh
  * @Description:gis地图
 -->
@@ -21,7 +21,7 @@ export default {
 
   data() {
     return {
-      src: 'http://192.168.8.154:18888/gis-chart',
+      src: 'http://192.168.8.154:18888/gis-chart', // 部署到同源地址，避免iframe跨域
       height: document.documentElement.clientHeight - 90 + 'px;',
       loading: true
     }
