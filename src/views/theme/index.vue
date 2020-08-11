@@ -87,7 +87,10 @@ export default {
 .box-card {
   width: 400px;
   max-width: 100%;
-  margin: 20px auto;
+  position: relative;
+  top: 20px;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .block {

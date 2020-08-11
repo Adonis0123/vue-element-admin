@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-10 18:07:44
+ * @LastEditTime: 2020-08-11 10:26:27
  * @LastEditors: Hzh
  * @Description:主体内容
 -->
@@ -36,27 +36,37 @@ export default {
 
 <style lang="scss" scoped>
 .app-main {
-  /*头部的高度  50= navbar  50*/
-  min-height: calc(100vh - 90px);
+  padding: 10px;
+  background: #ffffff;
+  box-sizing: border-box;
+  min-height: calc(100vh - 70px);
   width: 100%;
   position: relative;
   overflow: hidden;
 }
 
-.fixed-header + .app-main {
-  padding-top: 50px;
-}
-
+//如果有标签页的话
 .hasTagsView {
   .app-main {
-    /*头部的高度加标签页的高度  90 = navbar + tags-view = 50 + 40 */
-    min-height: calc(100vh - 90px);
-  }
-
-  .fixed-header + .app-main {
-    padding-top: 90px;
+    /* 110px: el-header 50px tags-view 40px  el-scrollbar__view 20px*/
+    min-height: calc(100vh - 110px);
   }
 }
+
+// .fixed-header + .app-main {
+//   padding-top: 50px;
+// }
+
+// .hasTagsView {
+//   .app-main {
+//     /*头部的高度加标签页的高度  90 = navbar + tags-view = 50 + 40 */
+//     min-height: calc(100vh - 90px);
+//   }
+
+//   .fixed-header + .app-main {
+//     padding-top: 90px;
+//   }
+// }
 </style>
 
 <style lang="scss">

@@ -17,20 +17,27 @@
 
   <el-container :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <!-- 头部 -->
     <el-header>
       <navbar />
     </el-header>
 
     <el-container class="app-container">
+      <!-- 侧边栏 -->
       <el-aside>
         <sidebar class="sidebar-container" />
       </el-aside>
 
-      <el-main>
+      <el-main :class="{hasTagsView:needTagsView}">
+        <!-- 便签页 -->
         <tags-view v-if="needTagsView" />
+
+        <!-- 内容 -->
         <el-scrollbar class="app-main-scroll">
           <app-main />
         </el-scrollbar>
+
+        <!-- 右边设置 -->
         <right-panel v-if="showSettings">
           <settings />
         </right-panel>
@@ -85,33 +92,6 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/mixin.scss";
 @import "~@/styles/variables.scss";
-.app-main-scroll {
-  width: 100%;
-  height: calc(100% - 40px); //40px tagsView的height
-  overflow: hidden;
-  ::v-deep .el-scrollbar__wrap {
-    overflow-x: hidden;
-  }
-}
-
-.el-header {
-  height: 50px!important;
-  padding: 0;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
-
-.el-main {
-  padding: 0;
-  height: calc(100vh - 50px);
-  overflow: hidden;
-}
-
-.el-aside {
-  height: calc(100vh - 50px);
-  width: auto !important;
-  padding: 0;
-  margin-bottom: 0;
-}
 
 .app-wrapper {
   @include clearfix;
@@ -123,13 +103,49 @@ export default {
     position: fixed;
     top: 0;
   }
+  .el-header {
+    height: 50px !important;
+    padding: 0;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  }
+  .app-container {
+    overflow: hidden;
+    .el-aside {
+      height: calc(100vh - 50px);
+      width: auto !important;
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    .el-main {
+      padding: 0;
+      height: calc(100vh - 50px);
+      overflow: hidden;
+      .app-main-scroll {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        ::v-deep .el-scrollbar__wrap {
+          overflow-x: hidden;
+        }
+        ::v-deep .el-scrollbar__view {
+          background: #f0f0f0;
+          padding: 10px;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
 }
 
-.app-container {
-  padding: 0;
-  overflow: hidden;
+// 如果有标签页的话
+.hasTagsView {
+  .app-main-scroll {
+    height: calc(100% - 40px)!important; //40px tagsView的height
+  }
 }
 
+//移动端下的阴影
 .drawer-bg {
   background: #000;
   opacity: 0.3;
