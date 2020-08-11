@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-10 18:09:43
+ * @LastEditTime: 2020-08-11 13:52:53
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -350,6 +350,7 @@ export default {
   padding: 7px 5px;
   height: 39px;
   border: none;
+  background:rgba(246,249,255,1);
 }
 // @import "~@/styles/element-variables.scss";
 .tags-view-container {

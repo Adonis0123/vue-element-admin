@@ -69,8 +69,7 @@ export default {
       sidebar: (state) => state.app.sidebar,
       device: (state) => state.app.device,
       showSettings: (state) => state.settings.showSettings,
-      needTagsView: (state) => state.settings.tagsView,
-      fixedHeader: (state) => state.settings.fixedHeader
+      needTagsView: (state) => state.settings.tagsView
     }),
     classObj() {
       return {
@@ -103,11 +102,15 @@ export default {
     position: fixed;
     top: 0;
   }
+
   .el-header {
     height: 50px !important;
     padding: 0;
-    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    box-shadow:0px 2px 8px 0px rgba(10,43,68,0.12);
+    position: relative; //解决box-shadow不显示的问题
+    z-index: 1;
   }
+
   .app-container {
     overflow: hidden;
     .el-aside {
@@ -121,6 +124,7 @@ export default {
       padding: 0;
       height: calc(100vh - 50px);
       overflow: hidden;
+      transition: width 0.28s;
       .app-main-scroll {
         width: 100%;
         height: 100%;
@@ -141,7 +145,7 @@ export default {
 // 如果有标签页的话
 .hasTagsView {
   .app-main-scroll {
-    height: calc(100% - 40px)!important; //40px tagsView的height
+    height: calc(100% - 40px) !important; //40px tagsView的height
   }
 }
 
@@ -156,20 +160,4 @@ export default {
   z-index: 99;
 }
 
-.fixed-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9;
-  width: calc(100% - #{$sideBarWidth});
-  transition: width 0.28s;
-}
-
-.hideSidebar .fixed-header {
-  width: calc(100% - 54px);
-}
-
-.mobile .fixed-header {
-  width: 100%;
-}
 </style>

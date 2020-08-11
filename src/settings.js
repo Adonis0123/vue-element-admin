@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-27 09:20:18
- * @LastEditTime: 2020-08-10 16:51:40
+ * @LastEditTime: 2020-08-11 13:49:40
  * @LastEditors: Hzh
  * @Description:全局设置文件
  */
@@ -19,12 +19,6 @@ module.exports = {
    * @type {boolean} true | false
    */
   tagsView: true,
-
-  /**
-   * @description 是否固定头部
-   * @type {boolean} true | false
-   */
-  fixedHeader: false,
 
   /**
    * @description 是否在侧边栏显示LOGO

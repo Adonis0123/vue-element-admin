@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-07-26 20:21:23
+ * @LastEditTime: 2020-08-11 13:49:03
  * @LastEditors: Hzh
 -->
 <template>
@@ -20,11 +20,6 @@
       <div class="drawer-item">
         <span>显示标签</span>
         <el-switch v-model="tagsView" class="drawer-switch" />
-      </div>
-
-      <div class="drawer-item">
-        <span>固定头部</span>
-        <el-switch v-model="fixedHeader" class="drawer-switch" />
       </div>
 
       <div class="drawer-item">
@@ -49,20 +44,6 @@ export default {
     return {}
   },
   computed: {
-    /**
-     * @description: 固定头部
-     */
-    fixedHeader: {
-      get() {
-        return this.$store.state.settings.fixedHeader
-      },
-      set(val) {
-        this.$store.dispatch('settings/changeSetting', {
-          key: 'fixedHeader',
-          value: val
-        })
-      }
-    },
 
     /**
      * @description: 显示标签
