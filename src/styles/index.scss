@@ -119,11 +119,12 @@ aside {
   }
 }
 
-//main-container全局样式
+//app-container页面样式 根据不同页面设置不同的padding
 .app-container {
   padding: 20px;
 }
 
+//components-container页面样式 根据不同页面设置不同的padding
 .components-container {
   margin: 30px 50px;
   position: relative;

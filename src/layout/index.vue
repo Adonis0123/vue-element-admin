@@ -62,6 +62,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/mixin.scss";
 @import "~@/styles/variables.scss";
+//整体滚动条
 .app-wrapper-scroll {
   width: 100%;
   height: 100%;
@@ -71,17 +72,20 @@ export default {
   }
 }
 
+//整体布局
 .app-wrapper {
   @include clearfix;
   position: relative;
   height: 100%;
   width: 100%;
+  //移动端下打开左侧侧边栏下的样式
   &.mobile.openSidebar {
     position: fixed;
     top: 0;
   }
 }
 
+//移动端下点击左侧菜单，右边的阴影样式
 .drawer-bg {
   background: #000;
   opacity: 0.3;
@@ -92,6 +96,7 @@ export default {
   z-index: 999;
 }
 
+//固定头部
 .fixed-header {
   position: fixed;
   top: 0;
@@ -101,10 +106,12 @@ export default {
   transition: width 0.28s;
 }
 
+//隐藏左侧菜单下 固定头部的宽度
 .hideSidebar .fixed-header {
   width: calc(100% - 54px);
 }
 
+//移动端下 固定头部的宽度
 .mobile .fixed-header {
   width: 100%;
 }
