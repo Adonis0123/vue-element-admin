@@ -1,14 +1,17 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-10 14:17:14
+ * @LastEditTime: 2020-08-14 13:36:23
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
 
 <template>
   <div id="tags-view-container" class="tags-view-container">
-    <el-button class="btn-icon btn-left" icon="el-icon-arrow-left" size="mini" @click="moveScroll(-200)" />
+    <!-- <el-button class="btn-icon btn-left" icon="el-icon-arrow-left" size="mini" @click="moveScroll(-200)" /> -->
+    <div class="btn-icon btn-left" @click.stop.prevent="moveScroll(-200)">
+      <svg-icon icon-class="zuo-yuan" />
+    </div>
     <scroll-pane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link
         v-for="tag in visitedViews"
@@ -30,7 +33,10 @@
         />
       </router-link>
     </scroll-pane>
-    <el-button class="btn-icon btn-right" size="mini" icon="el-icon-arrow-right" @click="moveScroll(200)" />
+    <!-- <el-button class="btn-icon btn-right" size="mini" icon="el-icon-arrow-right" @click="moveScroll(200)" /> -->
+    <div class="btn-icon btn-right" @click.stop.prevent="moveScroll(200)">
+      <svg-icon icon-class="you-yuan" />
+    </div>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">刷新</li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</li>
@@ -346,10 +352,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btn-icon{
-  padding: 7px 5px;
+.btn-icon {
+  width: 25px;
   height: 39px;
   border: none;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  &:active {
+    background-color: #f2f3f5;
+  }
+  .svg-icon {
+    color: #97a8be;
+    width: 20px;
+    height: 20px;
+  }
+  .svg-icon:hover {
+    color: rgb(24, 144, 255);
+  }
 }
 // @import "~@/styles/element-variables.scss";
 .tags-view-container {
@@ -362,7 +385,7 @@ export default {
   justify-content: center;
   position: relative;
   .tags-view-wrapper {
-     width: calc(100% - 48px); //48px: btnleft & btnright
+    width: calc(100% - 50px); //48px: btnleft & btnright
     .tags-view-item {
       display: inline-block;
       position: relative;

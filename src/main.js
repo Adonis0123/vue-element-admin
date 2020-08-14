@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-05 14:21:41
+ * @LastEditTime: 2020-08-14 13:20:43
  * @LastEditors: Hzh
  * @Description:全局函数入口
  */
@@ -23,6 +23,7 @@ import store from './store'
 import router from './router/index' // 引入路由
 
 import './icons' // icon
+// import '@/assets/iconfont/iconfont'
 import './permission' // 权限控制
 import './utils/error-log' // 错误日志
 

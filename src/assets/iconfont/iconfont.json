@@ -1,0 +1,23 @@
+{
+  "id": "2006194",
+  "name": "vue-admin",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4464081",
+      "name": "左-圆",
+      "font_class": "zuo-yuan",
+      "unicode": "e7c7",
+      "unicode_decimal": 59335
+    },
+    {
+      "icon_id": "4464086",
+      "name": "右-圆",
+      "font_class": "you-yuan",
+      "unicode": "e7c8",
+      "unicode_decimal": 59336
+    }
+  ]
+}
