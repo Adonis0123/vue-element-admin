@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-27 09:20:18
- * @LastEditTime: 2020-08-11 14:14:23
+ * @LastEditTime: 2020-08-14 16:05:42
  * @LastEditors: Hzh
  * @Description:全局设置文件
  */
@@ -24,7 +24,7 @@ module.exports = {
    * @description 是否在侧边栏显示LOGO
    * @type {boolean} true | false
    */
-  sidebarLogo: false,
+  sidebarLogo: true,
 
   /**
    * @description 是否只保持一个子菜单的展开

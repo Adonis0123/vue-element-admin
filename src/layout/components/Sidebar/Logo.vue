@@ -1,30 +1,33 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-27 10:01:43
+ * @LastEditTime: 2020-08-14 18:03:18
  * @LastEditors: Hzh
- * @Description: 侧边栏的LOGO
+ * @Description: 侧边栏的菜单搜索
 -->
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
       <!-- 折叠状态，有img就展示img否则展示标题 -->
-      <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 v-else class="sidebar-title">{{ title }}</h1>
-      </router-link>
+      <el-row v-if="collapse" class="sidebar-logo-link" type="flex" align="middle" justify="center">
+        <hamburger :is-active="sidebar.opened" class="sidebar-logo" @toggleClick="toggleSideBar" />
+      </el-row>
       <!-- 展开状态，判断是否有图片 -->
-      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 class="sidebar-title">{{ title }}</h1>
-      </router-link>
+      <el-row v-else class="sidebar-logo-link" type="flex" align="middle">
+
+        <header-search />
+        <hamburger :is-active="sidebar.opened" class="sidebar-logo" @toggleClick="toggleSideBar" />
+      </el-row>
     </transition>
   </div>
 </template>
 
 <script>
+import { Hamburger, HeaderSearch } from 'components'
+import { mapGetters } from 'vuex'
 export default {
   name: 'SidebarLogo',
+  components: { Hamburger, HeaderSearch },
   props: {
     collapse: {
       type: Boolean,
@@ -32,10 +35,17 @@ export default {
     }
   },
   data() {
-    return {
-      title: 'Vue Element Admin',
-      logo:
-        'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+    return {}
+  },
+  computed: {
+    ...mapGetters(['sidebar', 'device'])
+  },
+  methods: {
+    /**
+     * @description: 展开或者收起侧边菜单栏
+     */
+    toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar')
     }
   }
 }
@@ -56,7 +66,7 @@ export default {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #2b2f3a;
+  background: #383c48;
   text-align: center;
   overflow: hidden;
 
@@ -65,10 +75,13 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
       vertical-align: middle;
       margin-right: 12px;
+      ::v-deep .svg-icon{
+        margin-right: 0!important;
+        cursor: pointer;
+        color: #fff;
+      }
     }
 
     & .sidebar-title {
@@ -85,6 +98,9 @@ export default {
 
   &.collapse {
     .sidebar-logo {
+      display: flex;
+      align-content: center;
+      justify-content: center;
       margin-right: 0px;
     }
   }

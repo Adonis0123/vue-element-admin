@@ -74,6 +74,7 @@ export default {
 </style>
 <style lang="scss" scoped>
 .box-card-component {
+  max-width: 400px;
   .box-card-header {
     position: relative;
     height: 220px;

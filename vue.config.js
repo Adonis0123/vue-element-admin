@@ -54,7 +54,8 @@ module.exports = {
     resolve: {
       alias: {
         '@': resolve('src'),
-        'components': resolve('src/components')
+        'components': resolve('src/components'),
+        'imgs': resolve('src/assets/imgs')
       }
     }
   },
@@ -77,7 +78,7 @@ module.exports = {
     // 兼容ie
     config.entry.app = ['babel/polyfill', './src/main.js']
 
-    // set svg-sprite-loader
+    // 设置 svg-sprite-loader
     config.module
       .rule('svg')
       .exclude.add(resolve('src/icons'))

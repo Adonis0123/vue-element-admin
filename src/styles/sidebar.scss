@@ -149,13 +149,13 @@
 
     .el-aside{
       position: fixed;
+      transition: transform .28s;
       // height: 100vh; //可根据效果自行调整
       // top: 0;
       z-index: 100;
     }
 
     .sidebar-container {
-      transition: transform .28s;
       width: $sideBarWidth !important;
     }
 

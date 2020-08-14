@@ -1,14 +1,14 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-03 09:20:52
+ * @LastEditTime: 2020-08-14 18:02:48
  * @LastEditors: Hzh
  * @Description:搜索菜单
 -->
 
 <template>
   <div :class="{'show':show}" class="header-search">
-    <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" />
+    <!-- <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" /> -->
     <el-select
       ref="headerSearchSelect"
       v-model="search"
@@ -64,35 +64,35 @@ export default {
      */
     searchPool(list) {
       this.initFuse(list)
-    },
-
-    /**
-     * @description: 关闭搜索栏
-     * 全局监听click事件，只有show为true时才开启监听然后关闭搜索栏，否则移除监听事件
-     * @param {Boolean} value
-     */
-    show(value) {
-      if (value) {
-        document.body.addEventListener('click', this.close)
-      } else {
-        document.body.removeEventListener('click', this.close)
-      }
     }
+
+    // /**
+    //  * @description: 关闭搜索栏
+    //  * 全局监听click事件，只有show为true时才开启监听然后关闭搜索栏，否则移除监听事件
+    //  * @param {Boolean} value
+    //  */
+    // show(value) {
+    //   if (value) {
+    //     document.body.addEventListener('click', this.close)
+    //   } else {
+    //     document.body.removeEventListener('click', this.close)
+    //   }
+    // }
   },
   mounted() {
     // 初始化搜索池
     this.searchPool = this.generateRoutes(this.routes)
   },
   methods: {
-    /**
-     * @description: 开启或者关闭搜索栏
-     */
-    click() {
-      this.show = !this.show
-      if (this.show) {
-        this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
-      }
-    },
+    // /**
+    //  * @description: 开启或者关闭搜索栏
+    //  */
+    // click() {
+    //   this.show = !this.show
+    //   if (this.show) {
+    //     this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
+    //   }
+    // },
 
     /**
      * @description: 关闭搜索栏
@@ -231,16 +231,16 @@ export default {
 .header-search {
   font-size: 0 !important;
 
-  .search-icon {
-    cursor: pointer;
-    font-size: 18px;
-    vertical-align: middle;
-  }
+  // .search-icon {
+  //   cursor: pointer;
+  //   font-size: 18px;
+  //   vertical-align: middle;
+  // }
 
   .header-search-select {
     font-size: 18px;
     transition: width 0.2s;
-    width: 0;
+    width: 100px;
     overflow: hidden;
     background: transparent;
     border-radius: 0;
@@ -258,11 +258,11 @@ export default {
     }
   }
 
-  &.show {
-    .header-search-select {
-      width: 210px;
-      margin-left: 10px;
-    }
-  }
+  // &.show {
+  //   .header-search-select {
+  //     width: 210px;
+  //     margin-left: 10px;
+  //   }
+  // }
 }
 </style>

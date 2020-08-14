@@ -1,20 +1,19 @@
 <template>
-  <div class="navbar">
-    <hamburger
-      id="hamburger-container"
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
+  <el-row type="flex" align="middle" class="navbar" :class="{'mobile':device === 'mobile'}">
+    <template v-if="device==='mobile'">
+      <el-col class="hamburger-container" @click.native="toggleSideBar">
+        <hamburger id="hamburger-container" :is-active="sidebar.opened" />
+      </el-col>
+    </template>
 
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <div class="title" :style="{color:theme}">Vue Element Admin</div>
+
+    <div class="left-menu">
+      <template v-if="device!=='mobile'">12</template>
+    </div>
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-        <el-tooltip content="搜索菜单" effect="dark" placement="bottom">
-          <header-search id="header-search" class="right-menu-item" />
-        </el-tooltip>
-
         <error-log class="errLog-container right-menu-item hover-effect" />
 
         <el-tooltip content="全屏模式" effect="dark" placement="bottom">
@@ -25,7 +24,6 @@
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
       </template>
-
       <el-dropdown trigger="click" class="avatar-container right-menu-item hover-effect">
         <div class="avatar-wrapper">
           <img :src="manAvatar" class="user-avatar">
@@ -38,13 +36,13 @@
           <router-link to="/">
             <el-dropdown-item>首页</el-dropdown-item>
           </router-link>
-          <a
-            target="_blank"
-            href="https://panjiachen.gitee.io/vue-element-admin/#/"
-          >
+          <a target="_blank" href="https://panjiachen.gitee.io/vue-element-admin/#/">
             <el-dropdown-item>项目在线地址</el-dropdown-item>
           </a>
-          <a target="_blank" href="https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/#%E5%8A%9F%E8%83%BD">
+          <a
+            target="_blank"
+            href="https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/#%E5%8A%9F%E8%83%BD"
+          >
             <el-dropdown-item>项目文档</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
@@ -53,33 +51,44 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-  </div>
+  </el-row>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { Breadcrumb, Hamburger, ErrorLog, Screenfull, SizeSelect, HeaderSearch } from 'components'
+import { logo } from 'imgs'
+import {
+  // Breadcrumb,
+  Hamburger,
+  ErrorLog,
+  Screenfull,
+  SizeSelect
+  // HeaderSearch
+} from 'components'
 import avatar from '@/assets/imgs/avatar.png'
 
 export default {
   components: {
-    Breadcrumb,
+    // Breadcrumb,
     Hamburger,
     ErrorLog,
     Screenfull,
-    SizeSelect,
-    HeaderSearch
+    SizeSelect
+    // HeaderSearch
   },
   data() {
     return {
-      manAvatar: avatar
+      manAvatar: avatar,
+      logo: logo
     }
   },
   computed: {
-    ...mapGetters(['sidebar', 'avatar', 'device'])
+    ...mapGetters(['sidebar', 'avatar', 'device']),
+    theme() {
+      return this.$store.state.settings.theme
+    }
   },
   methods: {
-
     /**
      * @description: 展开或者收起侧边菜单栏
      */
@@ -105,33 +114,37 @@ export default {
   position: relative;
   background: #fff;
 
-  .hamburger-container {
-    line-height: 46px;
-    height: 100%;
-    float: left;
-    cursor: pointer;
-    transition: background 0.3s;
-    -webkit-tap-highlight-color: transparent;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.025);
-    }
-  }
-
-  .breadcrumb-container {
-    float: left;
-  }
-
   .errLog-container {
     display: inline-block;
     vertical-align: top;
   }
 
+  .title {
+    width: auto;
+    height: 100%;
+    padding: 0 19px;
+    display: flex;
+    align-items: center;
+    flex: none;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .left-menu {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    // width: calc(100% - 272px); //272px hamburger-container + right-menu
+    flex: 1;
+  }
+
   .right-menu {
-    float: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     height: 100%;
     line-height: 50px;
-
+    width: 222px;
     &:focus {
       outline: none;
     }
@@ -156,9 +169,12 @@ export default {
 
     .avatar-container {
       margin-right: 30px;
-
+      display: flex;
+      align-items: center;
       .avatar-wrapper {
-        margin-top: 5px;
+        // margin-top: 5px;
+        display: flex;
+        align-items: center;
         position: relative;
 
         .user-avatar {
@@ -177,6 +193,31 @@ export default {
         }
       }
     }
+  }
+}
+
+.mobile {
+  .hamburger-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.025);
+    }
+  }
+
+  // .left-menu {
+  //   // width: calc(100% - 136px);
+  //   // flex-grow: 1;
+  // }
+  .right-menu {
+    width: 86px;
   }
 }
 </style>
