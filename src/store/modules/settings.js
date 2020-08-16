@@ -1,20 +1,20 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-27 09:20:18
- * @LastEditTime: 2020-08-11 13:49:12
+ * @LastEditTime: 2020-08-16 13:13:51
  * @LastEditors: Hzh
  * @Description:系统设置
  */
 import variables from '@/styles/element-variables.scss'
 import defaultSettings from '@/settings'
 
-const { showSettings, tagsView, sidebarLogo, uniqueOpened } = defaultSettings
+const { showSettings, tagsView, menuSearch, uniqueOpened } = defaultSettings
 
 const state = {
   theme: variables.theme,
   showSettings: showSettings,
   tagsView: tagsView,
-  sidebarLogo: sidebarLogo,
+  menuSearch: menuSearch,
   uniqueOpened: uniqueOpened
 }
 

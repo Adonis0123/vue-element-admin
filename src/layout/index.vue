@@ -18,13 +18,13 @@
   <el-container :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <!-- 头部 -->
-    <el-header>
+    <el-header style="height:50px">
       <navbar />
     </el-header>
 
     <el-container class="app-container">
       <!-- 侧边栏 -->
-      <el-aside>
+      <el-aside style="width:auto">
         <sidebar class="sidebar-container" />
       </el-aside>
 
@@ -104,7 +104,6 @@ export default {
   }
 
   .el-header {
-    height: 50px !important;
     padding: 0;
     box-shadow:0px 2px 8px 0px rgba(10,43,68,0.12);
     position: relative; //解决box-shadow不显示的问题
@@ -114,8 +113,7 @@ export default {
   .app-container {
     overflow: hidden;
     .el-aside {
-      height: calc(100vh - 50px);
-      width: auto !important;
+      height: calc(100vh - 50px); //50px el-header height
       padding: 0;
       margin-bottom: 0;
     }

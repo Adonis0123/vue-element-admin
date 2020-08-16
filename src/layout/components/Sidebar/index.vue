@@ -1,13 +1,13 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-07 11:15:06
+ * @LastEditTime: 2020-08-16 13:38:10
  * @LastEditors: Hzh
  * @Description:侧边栏
 -->
 <template>
-  <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse" />
+  <div :class="{'has-logo':menuSearch}">
+    <sidebar-header v-if="menuSearch" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
@@ -32,12 +32,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Logo from './Logo'
+import SidebarHeader from './SidebarHeader'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
 
 export default {
-  components: { SidebarItem, Logo },
+  components: { SidebarItem, SidebarHeader },
   computed: {
     ...mapGetters(['permission_routes', 'sidebar']),
 
@@ -57,8 +57,8 @@ export default {
     /**
      * @description: 展示侧边栏的logo
      */
-    showLogo() {
-      return this.$store.state.settings.sidebarLogo
+    menuSearch() {
+      return this.$store.state.settings.menuSearch
     },
 
     /**

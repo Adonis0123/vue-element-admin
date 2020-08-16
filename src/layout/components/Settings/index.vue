@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-11 13:49:03
+ * @LastEditTime: 2020-08-16 13:12:32
  * @LastEditors: Hzh
 -->
 <template>
@@ -23,8 +23,8 @@
       </div>
 
       <div class="drawer-item">
-        <span>显示LOGO</span>
-        <el-switch v-model="sidebarLogo" class="drawer-switch" />
+        <span>显示菜单搜索</span>
+        <el-switch v-model="menuSearch" class="drawer-switch" />
       </div>
 
       <div class="drawer-item">
@@ -63,13 +63,13 @@ export default {
     /**
      * @description: 显示LOGO
      */
-    sidebarLogo: {
+    menuSearch: {
       get() {
-        return this.$store.state.settings.sidebarLogo
+        return this.$store.state.settings.menuSearch
       },
       set(val) {
         this.$store.dispatch('settings/changeSetting', {
-          key: 'sidebarLogo',
+          key: 'menuSearch',
           value: val
         })
       }

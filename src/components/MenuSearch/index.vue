@@ -1,27 +1,28 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-14 18:02:48
+ * @LastEditTime: 2020-08-16 15:27:41
  * @LastEditors: Hzh
  * @Description:搜索菜单
 -->
 
 <template>
-  <div :class="{'show':show}" class="header-search">
-    <!-- <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" /> -->
+  <div class="menu-search">
     <el-select
       ref="headerSearchSelect"
       v-model="search"
+      class="menu-search-select"
       :remote-method="querySearch"
       filterable
       default-first-option
       remote
       placeholder="搜索菜单"
-      class="header-search-select"
+      no-data-text="无此菜单"
       @change="change"
     >
       <el-option v-for="item in options" :key="item.path" :value="item" v-html="item.title" />
     </el-select>
+    <i class="el-icon-search" />
   </div>
 </template>
 
@@ -38,7 +39,6 @@ export default {
       search: '', // 搜索的值
       options: [], // 展示出的搜索结果
       searchPool: [], // 搜索池
-      show: false, // 是否展示搜索栏
       fuse: undefined
     }
   },
@@ -65,35 +65,12 @@ export default {
     searchPool(list) {
       this.initFuse(list)
     }
-
-    // /**
-    //  * @description: 关闭搜索栏
-    //  * 全局监听click事件，只有show为true时才开启监听然后关闭搜索栏，否则移除监听事件
-    //  * @param {Boolean} value
-    //  */
-    // show(value) {
-    //   if (value) {
-    //     document.body.addEventListener('click', this.close)
-    //   } else {
-    //     document.body.removeEventListener('click', this.close)
-    //   }
-    // }
   },
   mounted() {
     // 初始化搜索池
     this.searchPool = this.generateRoutes(this.routes)
   },
   methods: {
-    // /**
-    //  * @description: 开启或者关闭搜索栏
-    //  */
-    // click() {
-    //   this.show = !this.show
-    //   if (this.show) {
-    //     this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
-    //   }
-    // },
-
     /**
      * @description: 关闭搜索栏
      */
@@ -111,9 +88,6 @@ export default {
       this.$router.push(val.path)
       this.search = ''
       this.options = []
-      this.$nextTick(() => {
-        this.show = false
-      })
     },
 
     /**
@@ -228,15 +202,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header-search {
-  font-size: 0 !important;
+.menu-search {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  transition: width 0.2s;
+  width: 160px;
+  overflow: hidden;
+  .menu-search-select {
+    ::v-deep .el-input__inner {
+      background: rgba(85, 102, 118, 0.2);
+      border: none;
+      color: #91a4ab;
+      box-shadow: none !important;
+    }
+    ::v-deep .el-input--suffix {
+      position: relative;
+      .el-input__prefix {
+        display: flex;
+        align-items: center;
+      }
+      .el-input__suffix {
+        display: none;
+      }
+    }
+  }
 
-  // .search-icon {
-  //   cursor: pointer;
-  //   font-size: 18px;
-  //   vertical-align: middle;
-  // }
-
+  .el-icon-search {
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
   .header-search-select {
     font-size: 18px;
     transition: width 0.2s;
@@ -246,16 +246,6 @@ export default {
     border-radius: 0;
     display: inline-block;
     vertical-align: middle;
-
-    ::v-deep .el-input__inner {
-      border-radius: 0;
-      border: 0;
-      padding-left: 0;
-      padding-right: 0;
-      box-shadow: none !important;
-      border-bottom: 1px solid #d9d9d9;
-      vertical-align: middle;
-    }
   }
 
   // &.show {
@@ -264,5 +254,13 @@ export default {
   //     margin-left: 10px;
   //   }
   // }
+}
+.mobile{
+  .menu-search{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 185px;
+  }
 }
 </style>

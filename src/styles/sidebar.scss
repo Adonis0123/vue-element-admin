@@ -3,7 +3,7 @@
   //左侧菜单栏展开的样式
   .sidebar-container {
     transition      : width 0.3s;
-    width           : $sideBarWidth !important;
+    width           : $sideBarWidth;
     background-color: $menuBg;
     height          : 100%;
     font-size       : 0px;
@@ -15,6 +15,7 @@
     }
 
     .scrollbar-wrapper {
+      margin-right: -19px!important;
       overflow-x: hidden !important;
     }
 
@@ -85,7 +86,7 @@
   //侧边栏收起时的样式
   .hideSidebar {
     .sidebar-container {
-      width: 54px !important;
+      width: 54px;
     }
 
     .submenu-title-noDropdown {

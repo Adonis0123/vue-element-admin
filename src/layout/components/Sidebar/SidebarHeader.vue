@@ -1,33 +1,44 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-14 18:03:18
+ * @LastEditTime: 2020-08-16 15:28:57
  * @LastEditors: Hzh
  * @Description: 侧边栏的菜单搜索
 -->
 <template>
-  <div class="sidebar-logo-container" :class="{'collapse':collapse}">
-    <transition name="sidebarLogoFade">
-      <!-- 折叠状态，有img就展示img否则展示标题 -->
-      <el-row v-if="collapse" class="sidebar-logo-link" type="flex" align="middle" justify="center">
+  <div class="sidebar-header" :class="{'collapse':collapse}">
+    <transition name="sidebarHeaderFade">
+      <!-- 折叠状态 -->
+      <el-row
+        v-if="collapse"
+        class="sidebar-header-container"
+        type="flex"
+        align="middle"
+        justify="center"
+      >
         <hamburger :is-active="sidebar.opened" class="sidebar-logo" @toggleClick="toggleSideBar" />
       </el-row>
-      <!-- 展开状态，判断是否有图片 -->
-      <el-row v-else class="sidebar-logo-link" type="flex" align="middle">
+      <!-- 展开状态 -->
+      <el-row v-else :class="{'mobile':device==='mobile'}" class="sidebar-header-container" type="flex" align="middle">
+        <template v-if="device === 'mobile'">
+          <menu-search />
+        </template>
 
-        <header-search />
-        <hamburger :is-active="sidebar.opened" class="sidebar-logo" @toggleClick="toggleSideBar" />
+        <template v-else>
+          <menu-search />
+          <hamburger :is-active="sidebar.opened" class="sidebar-logo" @toggleClick="toggleSideBar" />
+        </template>
       </el-row>
     </transition>
   </div>
 </template>
 
 <script>
-import { Hamburger, HeaderSearch } from 'components'
+import { Hamburger, MenuSearch } from 'components'
 import { mapGetters } from 'vuex'
 export default {
   name: 'SidebarLogo',
-  components: { Hamburger, HeaderSearch },
+  components: { Hamburger, MenuSearch },
   props: {
     collapse: {
       type: Boolean,
@@ -52,33 +63,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sidebarLogoFade-enter-active {
+.sidebarHeaderFade-enter-active {
   transition: opacity 1.5s;
 }
 
-.sidebarLogoFade-enter,
-.sidebarLogoFade-leave-to {
+.sidebarHeaderFade-enter,
+.sidebarHeaderFade-leave-to {
   opacity: 0;
 }
 
-.sidebar-logo-container {
-  position: relative;
+.sidebar-header {
   width: 100%;
-  height: 50px;
-  line-height: 50px;
-  background: #383c48;
-  text-align: center;
+  height: 61px;
+  border-bottom: 1px solid #1f2d3d;
   overflow: hidden;
 
-  & .sidebar-logo-link {
+  &-container {
     height: 100%;
     width: 100%;
+    position: relative;
 
     & .sidebar-logo {
-      vertical-align: middle;
-      margin-right: 12px;
-      ::v-deep .svg-icon{
-        margin-right: 0!important;
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+
+      ::v-deep .svg-icon {
+        margin-right: 0 !important;
         cursor: pointer;
         color: #fff;
       }
@@ -98,9 +112,9 @@ export default {
 
   &.collapse {
     .sidebar-logo {
-      display: flex;
-      align-content: center;
-      justify-content: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       margin-right: 0px;
     }
   }

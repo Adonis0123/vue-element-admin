@@ -2,7 +2,7 @@
   <el-row type="flex" align="middle" class="navbar" :class="{'mobile':device === 'mobile'}">
     <template v-if="device==='mobile'">
       <el-col class="hamburger-container" @click.native="toggleSideBar">
-        <hamburger id="hamburger-container" :is-active="sidebar.opened" />
+        <hamburger class="hamburger" :is-active="sidebar.opened" />
       </el-col>
     </template>
 
@@ -198,15 +198,18 @@ export default {
 
 .mobile {
   .hamburger-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100%;
-    width: 50px;
+    width: 25px;
     cursor: pointer;
-    transition: background 0.3s;
-    -webkit-tap-highlight-color: transparent;
-
+    transition: width 0.3s;
+    position: relative;
+    .hamburger {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 25px;
+      width: 100%;
+    }
     &:hover {
       background: rgba(0, 0, 0, 0.025);
     }
