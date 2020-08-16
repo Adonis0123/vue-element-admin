@@ -6,10 +6,13 @@
       </el-col>
     </template>
 
-    <div class="title" :style="{color:theme}">Vue Element Admin</div>
+    <div class="title" :style="{color:theme}">
+      <el-image class="title-item logo" :src="logo" fit="contain" />
+      <div class="title-item">Vue Element Admin</div>
+    </div>
 
     <div class="left-menu">
-      <template v-if="device!=='mobile'">12</template>
+      <template v-if="device!=='mobile'">我是一级菜单导航</template>
     </div>
 
     <div class="right-menu">
@@ -123,11 +126,19 @@ export default {
     width: auto;
     height: 100%;
     padding: 0 19px;
-    display: flex;
-    align-items: center;
     flex: none;
     font-size: 18px;
     font-weight: 400;
+    &-item {
+      line-height: 50px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .logo {
+      margin-right: 8px;
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .left-menu {
