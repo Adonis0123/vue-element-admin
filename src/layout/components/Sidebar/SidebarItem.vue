@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-17 17:42:43
+ * @LastEditTime: 2020-08-17 22:38:41
  * @LastEditors: Hzh
  * @Description:组件嵌套
 -->
@@ -16,7 +16,6 @@
           ref="menuItem"
           :index="resolvePath(theOnlyOneChild.path)"
           :class="{'submenu-title-noDropdown':!isNest}"
-          @click.native="test(resolvePath(theOnlyOneChild.path))"
         >
           <item
             :icon="theOnlyOneChild.meta.icon||(item.meta&&item.meta.icon)"
@@ -115,9 +114,6 @@ export default {
   },
   methods: {
 
-    test(val) {
-      console.log(val)
-    },
     /**
      * @description: 处理跳转的路由
      * @param {Srting} routePath 路由路径或者外链
