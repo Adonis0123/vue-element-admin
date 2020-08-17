@@ -1,3 +1,11 @@
+/*
+ * @Author: Hzh
+ * @Date: 2020-07-22 18:16:18
+ * @LastEditTime: 2020-08-17 13:39:57
+ * @LastEditors: Hzh
+ * @Description:全局过滤器
+ */
+
 // import parseTime, formatTime and set to filter
 export { parseTime, formatTime } from '@/utils'
 
@@ -65,4 +73,13 @@ export function toThousandFilter(num) {
  */
 export function uppercaseFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+/**
+ * @description: 显示一级菜单的标题
+ * @param {Object} route
+ * @returns {String} title
+ */
+export function filterTitle(route) {
+  return route.meta ? route.meta.title : route.children[0].meta.title
 }

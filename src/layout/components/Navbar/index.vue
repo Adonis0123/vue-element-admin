@@ -12,7 +12,9 @@
     </div>
 
     <div class="left-menu">
-      <template v-if="device!=='mobile'">我是一级菜单导航</template>
+      <template v-if="device!=='mobile'">
+        <nav-menu />
+      </template>
     </div>
 
     <div class="right-menu">
@@ -58,6 +60,7 @@
 </template>
 
 <script>
+import NavMenu from './NavMenu'
 import { mapGetters } from 'vuex'
 import { logo } from 'imgs'
 import {
@@ -72,11 +75,11 @@ import avatar from '@/assets/imgs/avatar.png'
 
 export default {
   components: {
-    // Breadcrumb,
     Hamburger,
     ErrorLog,
     Screenfull,
-    SizeSelect
+    SizeSelect,
+    NavMenu
     // HeaderSearch
   },
   data() {

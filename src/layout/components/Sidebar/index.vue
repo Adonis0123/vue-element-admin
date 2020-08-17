@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-16 13:38:10
+ * @LastEditTime: 2020-08-17 17:46:33
  * @LastEditors: Hzh
  * @Description:侧边栏
 -->
@@ -20,7 +20,7 @@
         mode="vertical"
       >
         <sidebar-item
-          v-for="route in permission_routes"
+          v-for="route in menuList"
           :key="route.path"
           :item="route"
           :base-path="route.path"
@@ -39,7 +39,7 @@ import variables from '@/styles/variables.scss'
 export default {
   components: { SidebarItem, SidebarHeader },
   computed: {
-    ...mapGetters(['permission_routes', 'sidebar']),
+    ...mapGetters(['menuList', 'sidebar']),
 
     /**
      * @description: 侧边栏高亮
@@ -51,6 +51,7 @@ export default {
       if (meta.activeMenu) {
         return meta.activeMenu
       }
+
       return path
     },
 

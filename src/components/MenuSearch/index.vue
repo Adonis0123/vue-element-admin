@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-16 15:27:41
+ * @LastEditTime: 2020-08-17 09:28:27
  * @LastEditors: Hzh
  * @Description:搜索菜单
 -->
@@ -150,15 +150,8 @@ export default {
         }
 
         // 递归子路由
-        if (router.children) {
-          const tempRoutes = this.generateRoutes(
-            router.children,
-            data.path,
-            data.title
-          )
-          if (tempRoutes.length >= 1) {
-            res = [...res, ...tempRoutes]
-          }
+        if (router.children && router.children.length) {
+          res = res.concat(this.generateRoutes(router.children, data.path, data.title))
         }
       }
       return res
@@ -237,23 +230,7 @@ export default {
     transform: translateY(-50%);
     right: 10px;
   }
-  .header-search-select {
-    font-size: 18px;
-    transition: width 0.2s;
-    width: 100px;
-    overflow: hidden;
-    background: transparent;
-    border-radius: 0;
-    display: inline-block;
-    vertical-align: middle;
-  }
 
-  // &.show {
-  //   .header-search-select {
-  //     width: 210px;
-  //     margin-left: 10px;
-  //   }
-  // }
 }
 .mobile{
   .menu-search{

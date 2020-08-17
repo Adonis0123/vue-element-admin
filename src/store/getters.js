@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-31 17:58:27
+ * @LastEditTime: 2020-08-17 10:28:30
  * @LastEditors: Hzh
  * @Description:
  */
@@ -17,6 +17,7 @@ const getters = {
   introduction: state => state.user.introduction,
   roles: state => state.user.roles,
   permission_routes: state => state.permission.routes, // 所有的路由
+  menuList: state => state.menu.menuList,
   errorLogs: state => state.errorLog.logs,
   theme: state => state.settings.theme
 }
