@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-07 11:25:38
+ * @LastEditTime: 2020-08-18 19:59:24
  * @LastEditors: Hzh
  * @Description:选择
 -->
@@ -43,7 +43,7 @@ export default {
       if (typeof val !== 'string') return
       const themeCluster = this.getThemeCluster(val.replace('#', ''))
       const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
-      console.log(themeCluster, originalCluster)
+      // console.log(themeCluster, originalCluster)
 
       const $message = this.$message({
         message: '更换主题中',

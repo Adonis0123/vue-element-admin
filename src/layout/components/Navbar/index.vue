@@ -114,6 +114,7 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   height: 100%;
+  width: 100%;
   overflow: hidden;
   position: relative;
   background: #fff;
@@ -124,10 +125,10 @@ export default {
   }
 
   .title {
-    width: auto;
+    width: 244px;
     height: 100%;
     padding: 0 19px;
-    flex: none;
+    // flex: none;
     font-size: 18px;
     font-weight: 400;
     &-item {
@@ -146,17 +147,18 @@ export default {
     display: flex;
     align-items: center;
     height: 100%;
-    // width: calc(100% - 272px); //272px hamburger-container + right-menu
-    flex: 1;
+    width: calc(100% - 244px - 222px ); //272px hamburger-container + right-menu
+    // flex: 1;
   }
 
   .right-menu {
+      width: 222px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     height: 100%;
     line-height: 50px;
-    width: 222px;
+
     &:focus {
       outline: none;
     }
