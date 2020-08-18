@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-14 13:32:14
+ * @LastEditTime: 2020-08-18 18:02:21
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -120,8 +120,9 @@ export default {
     activeColor(tag) {
       if (this.isActive(tag)) {
         return {
-          borderColor: this.themeColor,
-          background: this.themeColor
+          // borderColor: this.themeColor,
+          // background: this.themeColor,
+          color: this.themeColor
         }
       }
     },
@@ -399,27 +400,28 @@ export default {
       font-size: 12px;
       margin-left: 5px;
       margin-top: 6px;
-      &:first-of-type {
-        margin-left: 15px;
-      }
-      &:last-of-type {
-        margin-right: 15px;
-      }
-      &.active {
+      user-select: none;
+      // &:first-of-type {
+      //   margin-left: 15px;
+      // }
+      // &:last-of-type {
+      //   margin-right: 15px;
+      // }
+      // &.active {
         // background-color: $--color-primary;
-        color: #fff;
+        // color: #fff;
         // border-color: $--color-primary;
-        &::before {
-          content: "";
-          background: #fff;
-          display: inline-block;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          position: relative;
-          margin-right: 2px;
-        }
-      }
+        // &::before {
+        //   content: "";
+        //   background: #fff;
+        //   display: inline-block;
+        //   width: 8px;
+        //   height: 8px;
+        //   border-radius: 50%;
+        //   position: relative;
+        //   margin-right: 2px;
+        // }
+      // }
     }
   }
   .contextmenu {

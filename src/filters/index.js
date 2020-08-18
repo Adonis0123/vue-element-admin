@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-17 13:39:57
+ * @LastEditTime: 2020-08-18 15:12:27
  * @LastEditors: Hzh
  * @Description:全局过滤器
  */
@@ -80,6 +80,6 @@ export function uppercaseFirst(string) {
  * @param {Object} route
  * @returns {String} title
  */
-export function filterTitle(route) {
+export function filterFirstMenuTitle(route) {
   return route.meta ? route.meta.title : route.children[0].meta.title
 }

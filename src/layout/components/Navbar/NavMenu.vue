@@ -1,19 +1,19 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-08-17 09:44:27
- * @LastEditTime: 2020-08-18 11:40:55
+ * @LastEditTime: 2020-08-18 17:05:37
  * @LastEditors: Hzh
  * @Description:一级菜单导航
 -->
 <template>
   <div class="nav-menu-container">
-    <el-menu :default-active="activeMenu.path" mode="horizontal">
+    <el-menu ref="elMenu" :default-active="activeMenu.path" active-text-color="#fff" mode="horizontal">
       <el-menu-item
         v-for="(route,index) in routes"
         :key="index"
         :index="route.path"
         @click="handleSelectMenu(route)"
-      >{{ route | filterTitle }}</el-menu-item>
+      >{{ route | filterFirstMenuTitle }}</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -32,12 +32,13 @@ export default {
   data() {
     return {
       activeMenu: {}, // 当前高亮的一级菜单
-      linkToRootPath: ''
+      linkToRootPath: '' // 一级路由的根路由
     }
   },
 
   computed: {
-    ...mapGetters(['permission_routes', 'device']),
+    ...mapGetters(['permission_routes', 'device', 'theme']),
+    // 左侧菜单的数据
     menuList: {
       get() {
         return this.$store.state.menu.menuList
@@ -55,6 +56,7 @@ export default {
     $route: {
       handler: function(newVal, oldVal) {
         this.handleSiderbarMenuList()
+        this.changeActiveMenuColor()
       },
       immediate: true
     },
@@ -66,6 +68,11 @@ export default {
     device: {
       handler: function(newVal, oldVal) {
         this.handleSiderbarMenuList()
+      }
+    },
+    theme: {
+      handler: function(newVal, oldVal) {
+        this.changeActiveMenuColor()
       }
     }
   },
@@ -93,14 +100,17 @@ export default {
      */
     matchActiveMenu(routes) {
       for (const router of routes) {
+        // 判断是否首页
         if (this.$route.matched[0].path === '') {
           this.activeMenu = routes[0]
           this.menuList = routes[0].children
           this.$store.dispatch('menu/setRootPath', routes[0].path)
+          break
         } else if (this.$route.matched[0].path === router.path) {
           this.activeMenu = router
           this.menuList = router.children
           this.$store.dispatch('menu/setRootPath', router.path)
+          break
         }
       }
     },
@@ -133,6 +143,22 @@ export default {
       } else if (activeMenu.children && activeMenu.children.length) {
         this.linkToFirstPage(activeMenu.children[0], activeMenu.path)
       }
+    },
+
+    /**
+     * @description: 激活的背景颜色
+     */
+    changeActiveMenuColor() {
+      this.$nextTick(() => {
+        const menuChild = this.$refs.elMenu.$el.children
+        for (const item of menuChild) {
+          if (item.className.indexOf('is-active') !== -1) {
+            item.style.background = this.theme
+          } else {
+            item.style.background = '#fff'
+          }
+        }
+      })
     }
   }
 }
@@ -142,5 +168,16 @@ export default {
 .nav-menu-container {
   height: 100%;
   width: 100%;
+  .el-menu{
+
+    &-item{
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      &.is-active{
+        border: 0;
+      }
+    }
+  }
 }
 </style>

@@ -1,19 +1,4 @@
 <template>
-  <!-- <el-scrollbar class="app-wrapper-scroll"> -->
-  <!-- <div :class="classObj" class="app-wrapper">
-      <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-      <sidebar class="sidebar-container" />
-      <div :class="{hasTagsView:needTagsView}" class="main-container">
-        <div :class="{'fixed-header':fixedHeader}">
-          <navbar />
-          <tags-view v-if="needTagsView" />
-        </div>
-        <app-main />
-        <right-panel v-if="showSettings">
-          <settings />
-        </right-panel>
-      </div>
-  </div>-->
 
   <el-container :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
@@ -70,6 +55,7 @@ export default {
       device: (state) => state.app.device,
       showSettings: (state) => state.settings.showSettings,
       needTagsView: (state) => state.settings.tagsView
+      // theme: (state) => state.settings.theme
     }),
     classObj() {
       return {
@@ -80,10 +66,31 @@ export default {
       }
     }
   },
+  // watch: {
+  //   theme: {
+  //     handler: function(newVal) {
+  //       this.setThemeColor()
+  //     },
+  //     immediate: true
+  //   }
+  // },
   methods: {
+    /**
+     * @description: 关闭侧边栏菜单
+     */
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     }
+
+    // /**
+    //  * @description: 设置主题颜色,css也能使用全局主题颜色，但是兼容性不太好，仅作测试，慎用
+    //  */
+    // setThemeColor() {
+    //   document.body.style.setProperty(
+    //     '--theme-color',
+    //     this.theme
+    //   )
+    // }
   }
 }
 </script>

@@ -105,7 +105,7 @@ export const constantRoutes = [
     sort: 2,
     children: [
       {
-        path: '/documentation/index',
+        path: 'index',
         component: () => import('@/views/documentation/index'),
         name: 'Documentation',
         meta: { title: '项目文档', icon: 'documentation' }
@@ -168,7 +168,7 @@ export let asyncRoutes = [
     sort: 11,
     children: [
       {
-        path: '/clipboard/index',
+        path: 'index',
         component: () => import('@/views/clipboard/index'),
         name: 'ClipboardDemo',
         meta: { title: '剪切板', icon: 'clipboard' }
@@ -181,7 +181,7 @@ export let asyncRoutes = [
     sort: 6,
     children: [
       {
-        path: '/icon/index',
+        path: 'index',
         component: () => import('@/views/icons/index'),
         name: 'Icons',
         meta: { title: '图标', icon: 'icon', noCache: true }

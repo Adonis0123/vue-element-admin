@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-17 22:38:41
+ * @LastEditTime: 2020-08-18 15:32:26
  * @LastEditors: Hzh
  * @Description:组件嵌套
 -->
@@ -75,9 +75,14 @@ export default {
     return {}
   },
   computed: {
+
+    /**
+     * @description: 当前菜单所属的一级菜单路径
+     */
     rootPath() {
       return this.$store.state.menu.rootPath
     },
+
     /**
      * 获取需要显示的子菜单或菜单目录数组，当数组长度大于0时，说明当前是菜单目录
      */
@@ -113,7 +118,6 @@ export default {
     }
   },
   methods: {
-
     /**
      * @description: 处理跳转的路由
      * @param {Srting} routePath 路由路径或者外链
@@ -126,8 +130,8 @@ export default {
       if (isExternal(this.basePath)) {
         return this.basePath
       }
+
       // 合并rootPath、basePath和routerPath 例如/permission page将会变成/permission/page
-      // console.log(path.resolve(this.rootPath, this.basePath, routePath))
       return path.resolve(this.rootPath, this.basePath, routePath)
     }
   }
