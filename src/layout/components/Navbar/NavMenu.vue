@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-08-17 09:44:27
- * @LastEditTime: 2020-08-18 17:05:37
+ * @LastEditTime: 2020-08-19 00:46:07
  * @LastEditors: Hzh
  * @Description:一级菜单导航
 -->
@@ -174,6 +174,7 @@ export default {
       display: inline-block;
       height: 50px;
       line-height: 50px;
+      user-select: none;
       &.is-active{
         border: 0;
       }
