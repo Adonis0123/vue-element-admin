@@ -12,9 +12,7 @@
     </div>
 
     <div class="left-menu">
-      <template v-if="device!=='mobile'">
-        <nav-menu />
-      </template>
+      <nav-menu v-show="device!=='mobile'" />
     </div>
 
     <div class="right-menu">

@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-17 17:46:33
+ * @LastEditTime: 2020-08-18 11:40:00
  * @LastEditors: Hzh
  * @Description:侧边栏
 -->
@@ -51,7 +51,6 @@ export default {
       if (meta.activeMenu) {
         return meta.activeMenu
       }
-
       return path
     },
 
