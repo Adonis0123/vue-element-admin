@@ -83,7 +83,7 @@ export default {
     }
 
     // /**
-    //  * @description: 设置主题颜色,css也能使用全局主题颜色，但是兼容性不太好，仅作测试，慎用
+    //  * @description: 设置主题颜色,css也能使用js变量，但是兼容性不太好，仅作测试，慎用
     //  */
     // setThemeColor() {
     //   document.body.style.setProperty(

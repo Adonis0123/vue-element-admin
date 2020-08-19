@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-17 09:28:27
+ * @LastEditTime: 2020-08-19 15:45:53
  * @LastEditors: Hzh
  * @Description:搜索菜单
 -->
@@ -31,6 +31,7 @@
 // 使搜索结果更符合预期
 import Fuse from 'fuse.js'
 import path from 'path'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'HeaderSearch',
@@ -43,6 +44,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['menuList']),
+    rootPath() {
+      return this.$store.state.menu.rootPath
+    },
     // 所有的路由
     routes() {
       return this.$store.getters.permission_routes
@@ -55,8 +60,8 @@ export default {
     /**
      * @description: 监听routes,当permission_routes有变化时重置searchPool
      */
-    routes() {
-      this.searchPool = this.generateRoutes(this.routes)
+    menuList() {
+      this.searchPool = this.generateRoutes(this.menuList)
     },
 
     /**
@@ -68,7 +73,7 @@ export default {
   },
   mounted() {
     // 初始化搜索池
-    this.searchPool = this.generateRoutes(this.routes)
+    this.searchPool = this.generateRoutes(this.menuList)
   },
   methods: {
     /**
@@ -124,7 +129,7 @@ export default {
      * 第二级路由path.resolve('/nested', 'menu1') 则为/nested/menu1
      * @param {Array} prefixTitle 路由的上一级标题
      */
-    generateRoutes(routes, basePath = '/', prefixTitle = []) {
+    generateRoutes(routes, basePath = this.rootPath, prefixTitle = []) {
       let res = []
 
       for (const router of routes) {

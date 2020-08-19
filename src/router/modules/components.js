@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-18 11:20:34
+ * @LastEditTime: 2020-08-19 14:16:52
  * @LastEditors: Hzh
  * @Description:组件库
  */
@@ -19,18 +19,6 @@ const componentsRouter = {
     icon: 'component'
   },
   children: [
-    {
-      path: 'tinymce',
-      component: () => import('@/views/components-demo/tinymce'),
-      name: 'TinymceDemo',
-      meta: { title: '富文本编辑器' }
-    },
-    {
-      path: 'markdown',
-      component: () => import('@/views/components-demo/markdown'),
-      name: 'MarkdownDemo',
-      meta: { title: 'Markdown' }
-    },
     {
       path: 'sticky',
       component: () => import('@/views/components-demo/sticky'),

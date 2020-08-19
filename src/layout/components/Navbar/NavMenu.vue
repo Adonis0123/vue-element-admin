@@ -1,31 +1,46 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-08-17 09:44:27
- * @LastEditTime: 2020-08-19 00:46:07
+ * @LastEditTime: 2020-08-19 15:31:32
  * @LastEditors: Hzh
  * @Description:一级菜单导航
 -->
 <template>
   <div class="nav-menu-container">
-    <el-menu ref="elMenu" :default-active="activeMenu.path" active-text-color="#fff" mode="horizontal">
-      <el-menu-item
-        v-for="(route,index) in routes"
-        :key="index"
-        :index="route.path"
-        @click="handleSelectMenu(route)"
-      >{{ route | filterFirstMenuTitle }}</el-menu-item>
-    </el-menu>
+    <better-scroll
+      ref="scrollPane"
+      :data="routes"
+      :scroll-x="true"
+      :scroll-y="false"
+      class="el-menu-wrapper"
+    >
+      <el-menu
+        ref="elMenu"
+        class="el-menu-content"
+        :default-active="activeMenu.path"
+        active-text-color="#fff"
+        mode="horizontal"
+      >
+        <el-menu-item
+          v-for="(route,index) in routes"
+          :key="index"
+          :index="route.path"
+          @click="handleSelectMenu(route)"
+        >{{ route | filterFirstMenuTitle }}</el-menu-item>
+      </el-menu>
+    </better-scroll>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { isExternal } from '@/utils/validate'
+import BetterScroll from './BetterScroll'
 import path from 'path'
 export default {
   name: 'MenuContainer',
 
-  components: {},
+  components: { BetterScroll },
 
   props: {},
 
@@ -120,6 +135,8 @@ export default {
      * @param {Object} route 当前点击的菜单
      */
     handleSelectMenu(route) {
+      const [{ $el }] = this.$refs.elMenu.$children.filter(item => item.index === route.path)
+      this.$refs.scrollPane.scrollToElement($el, 350, true)
       this.linkToRootPath = route.path
       this.linkToFirstPage(route)
     },
@@ -168,14 +185,20 @@ export default {
 .nav-menu-container {
   height: 100%;
   width: 100%;
-  .el-menu{
-
-    &-item{
+  .el-menu-wrapper {
+    width: 100%;
+  }
+  .el-menu {
+    display: inline-block;
+    white-space: nowrap;
+    &-item {
       display: inline-block;
+
+      float: none;
       height: 50px;
       line-height: 50px;
       user-select: none;
-      &.is-active{
+      &.is-active {
         border: 0;
       }
     }
