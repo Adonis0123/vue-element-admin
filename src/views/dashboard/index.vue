@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-31 09:51:32
+ * @LastEditTime: 2020-08-20 10:51:11
  * @LastEditors: Hzh
  * @Description:首页
 -->
@@ -37,3 +37,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.dashboard-container{
+  height: 100%;
+}
+</style>

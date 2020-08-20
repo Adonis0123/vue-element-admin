@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-11 10:26:27
+ * @LastEditTime: 2020-08-20 10:53:03
  * @LastEditors: Hzh
  * @Description:主体内容
 -->
@@ -39,7 +39,7 @@ export default {
   padding: 10px;
   background: #ffffff;
   box-sizing: border-box;
-  min-height: calc(100vh - 70px);
+  height: calc(100vh - 70px);
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -49,7 +49,7 @@ export default {
 .hasTagsView {
   .app-main {
     /* 110px: el-header 50px tags-view 40px  el-scrollbar__view 20px*/
-    min-height: calc(100vh - 110px);
+    height: calc(100vh - 110px);
   }
 }
 
