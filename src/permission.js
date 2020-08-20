@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-07-24 17:45:22
+ * @LastEditTime: 2020-08-20 11:02:08
  * @LastEditors: Hzh
  * @Description:判断用户权限生成异步路由
  */
@@ -13,7 +13,7 @@ import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // 从cookie获取token
 import getPageTitle from '@/utils/get-page-title'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+NProgress.configure({ showSpinner: false }) // NProgress Configuration showSpinner 是否显示环形进度动画
 
 const whiteList = ['/login', '/auth-redirect'] // 不需要登录就可以访问的页面
 
