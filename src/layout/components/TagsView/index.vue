@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-20 13:16:19
+ * @LastEditTime: 2020-08-20 13:29:19
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -187,7 +187,7 @@ export default {
     addTags() {
       const { path, fullPath, name, meta } = this.$route
       // meta设置了tagsView = false 则不再标签中显示，且不缓存
-      if (meta.tagsView !== undefined && !meta.tagView) return
+      if (meta.tagsView === false) return
       // 拷贝标签需要的属性
       const tag = {
         path,
