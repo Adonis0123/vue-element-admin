@@ -14,12 +14,14 @@
         </right-panel>
       </div>
     </div>
+    <!--  防止刷新后主题丢失  -->
+    <theme v-show="false" ref="theme" />
   </el-scrollbar>
 </template>
 
 <script>
 import RightPanel from '@/components/RightPanel'
-import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
+import { AppMain, Navbar, Settings, Sidebar, TagsView, ThemePicker as Theme } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import { mapState } from 'vuex'
 
@@ -31,7 +33,8 @@ export default {
     RightPanel,
     Settings,
     Sidebar,
-    TagsView
+    TagsView,
+    Theme
   },
   mixins: [ResizeMixin],
   computed: {
