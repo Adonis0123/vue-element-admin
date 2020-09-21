@@ -25,10 +25,12 @@ module.exports = {
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
   publicPath: process.env.NODE_ENV === 'development' ? '/' : '/vue-admin/',
+
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
+
   devServer: {
     port: port,
     open: false,
@@ -47,6 +49,7 @@ module.exports = {
     // },
     before: require('./mock/mock-server.js')
   },
+
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
@@ -58,6 +61,7 @@ module.exports = {
       }
     }
   },
+
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
     // it can improve the speed of the first screen, it is recommended to turn on preload
@@ -133,5 +137,14 @@ module.exports = {
           config.optimization.runtimeChunk('single')
         }
       )
+  },
+
+  pluginOptions: {
+    'style-resources-loader': {
+      preProcessor: 'scss',
+      patterns: [
+        path.resolve(__dirname, 'src/styles/index.scss') // 引入全局scss
+      ]
+    }
   }
 }

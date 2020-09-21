@@ -78,6 +78,7 @@ export default {
       formLoading: false,
       saveLoading: false,
 
+      /* 表单初始化参数 */
       defaultForm: {
         name: null,
         birthDate: null,
@@ -86,6 +87,7 @@ export default {
         love: []
       },
       form: {},
+      /* 表单参数校验规则 */
       rules: {
         name: [
           { required: true, message: '不能为空', trigger: 'blur' }
@@ -100,7 +102,7 @@ export default {
   },
   methods: {
     /**
-     * 自定义校验规则
+     * @description: 自定义校验规则
      */
     customValid(rule, value, callback) {
       const reg = new RegExp(/^https?:\/\/.*$/)
@@ -112,8 +114,9 @@ export default {
         callback()
       }
     },
+
     /**
-     * 重置表单数据
+     * @description: 重置表单数据
      */
     resetForm() {
       // this.$refs.form.resetFields();
@@ -122,7 +125,7 @@ export default {
     },
 
     /**
-     * 校验表单数据
+     * @description: 校验表单数据
      */
     async validateForm() {
       return new Promise((resolve, reject) => {
@@ -137,8 +140,8 @@ export default {
     },
 
     /**
-     * 移除表单项的校验结果
-     * @param props 传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果
+     * @description: 移除表单项的校验结果
+     * @param {String} props 传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果
      */
     clearFormValidate(props = []) {
       this.$nextTick(() => {
@@ -149,7 +152,7 @@ export default {
     },
 
     /**
-     * 获取被编辑的数据
+     * @description: 获取被编辑的数据
      */
     async getForm() {
       try {
@@ -168,7 +171,7 @@ export default {
     },
 
     /**
-     * 保存表单
+     * @description: 保存表单
      */
     async saveForm() {
       try {
@@ -191,7 +194,7 @@ export default {
     },
 
     /**
-     * 添加表单
+     * @description: 添加表单
      * @return {Promise}
      */
     async addForm() {
@@ -201,7 +204,7 @@ export default {
     },
 
     /**
-     * 编辑表单
+     * @description: 编辑表单
      * @return {Promise}
      */
     async editForm() {

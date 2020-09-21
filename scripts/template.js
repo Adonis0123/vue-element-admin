@@ -1,3 +1,4 @@
+
 // template.js
 module.exports = {
   vueTemplate: compoenntName => {
@@ -33,10 +34,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-  .${compoenntName}{
-
-  }
+<style lang="scss" scoped>
 </style>
 `
   }

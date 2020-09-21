@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-20 16:34:41
+ * @LastEditTime: 2020-09-21 10:32:16
  * @LastEditors: Hzh
  * @Description:组件库
  */
@@ -24,6 +24,18 @@ const componentsRouter = {
       component: () => import('@/views/components-demo/ele-form'),
       name: 'EleForm',
       meta: { title: 'ele表单' }
+    },
+    {
+      path: 'ele-dialog-form',
+      component: () => import('@/views/components-demo/ele-dialog-form'),
+      name: 'DialogForm',
+      meta: { title: 'ele对话框表单' }
+    },
+    {
+      path: 'ele-table',
+      component: () => import('@/views/components-demo/ele-table'),
+      name: 'EleTable',
+      meta: { title: 'ele表格' }
     },
     {
       path: 'tinymce',

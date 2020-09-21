@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-11 10:38:07
+ * @LastEditTime: 2020-09-21 13:23:31
  * @LastEditors: Hzh
  * @Description:主体内容
 -->
@@ -37,7 +37,8 @@ export default {
 <style lang="scss" scoped>
 .app-main {
   /*头部的高度 没有tags-view  50= navbar  50*/
-  min-height: calc(100vh - 50px);
+  // min-height: calc(100vh - 50px);
+  height: calc(100vh - 50px);
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -52,7 +53,8 @@ export default {
 .hasTagsView {
   .app-main {
     /*头部的高度加标签页的高度  90 = navbar + tags-view = 50 + 40 */
-    min-height: calc(100vh - 90px);
+    // min-height: calc(100vh - 90px);
+     height: calc(100vh - 90px);
   }
   //固定头部下 .app-main的padding-top
   .fixed-header + .app-main {

@@ -64,3 +64,38 @@
     border-bottom: $transparent-border-style;
   }
 }
+
+
+@mixin yCenter() {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin xCenter() {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin xyCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin textM {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@mixin textL {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+@mixin textXl {
+  font-size: 18px;
+  font-weight: 400;
+}
