@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-09-21 13:27:20
+ * @LastEditTime: 2020-09-21 16:35:15
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -77,7 +77,7 @@ export default {
         return this.$store.state.permission.routes
       },
       set() {
-        this.$dispatch('tagsView/delAllViews')
+        this.$store.dispatch('tagsView/delAllViews')
       }
     },
 

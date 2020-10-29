@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-09-16 16:50:01
- * @LastEditTime: 2020-09-21 11:44:30
+ * @LastEditTime: 2020-09-22 16:04:25
  * @LastEditors: Hzh
  * @Description:数据元
 -->
@@ -365,6 +365,10 @@ export default {
       const listener = elementResizeDetectorMaker()
       listener.listenTo(this.$refs.wrap.$el, (element) => {
         this.setTableHeight()
+      })
+      /* 销毁监听 */
+      this.$on('hook:beforeDestroy', () => {
+        listener.uninstall(this.$refs.wrap.$el)
       })
     },
 
