@@ -1,7 +1,7 @@
 <!--
  * @Author: Hzh
  * @Date: 2020-07-25 00:32:14
- * @LastEditTime: 2020-08-20 13:29:19
+ * @LastEditTime: 2020-10-30 11:04:01
  * @LastEditors: Hzh
  * @Description:标签组件 @contextmenu 右键菜单 @click.middle 鼠标滚轮单击触发
 -->
@@ -144,8 +144,8 @@ export default {
 
     /**
      * @description: 递归遍历路由表，获取meta带有affix的路由
-     * @param {Object} routes 递归路由
-     * @param {Object} basePath 父路由路径
+     * @param {Array} routes 递归路由
+     * @param {String} basePath 父路由路径
      * @returns {Array} 标签数组
      */
     filterAffixTags(routes, basePath = '/') {

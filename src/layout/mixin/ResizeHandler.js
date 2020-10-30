@@ -1,7 +1,7 @@
 /*
  * @Author: Hzh
  * @Date: 2020-07-22 18:16:18
- * @LastEditTime: 2020-08-03 13:30:47
+ * @LastEditTime: 2020-10-30 10:52:21
  * @LastEditors: Hzh
  * @Description:根据屏幕宽度判断pc端还是移动端
  */
